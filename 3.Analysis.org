@@ -1,0 +1,148 @@
+* 3.1. Objectives
+  - To understand why algorithm analysis is important.
+  - To be able to use “Big-O” to describe execution time.
+  - To understand the “Big-O” execution time of common operations on Python
+    lists and dictionaries.
+  - To understand how the implementation of Python data impacts algorithm
+    analysis.
+  - To understand how to benchmark simple Python programs.
+* 3.2. What Is Algorithm Analysis?
+  [[file:activeCode/sumOfN.py]]
+
+  [[file:activeCode/foo.py]]
+  
+  readable, understandable code.
+
+  Algorithm analysis is concerned with comparing algorithms based upon the
+  amount of computing resources that each algorithm uses.
+
+  consider the amount of space or memory an algorithm requires to solve the
+  problem.
+
+  analyze and compare algorithms based on the amount of time they require to
+  execute. This measure is sometimes referred to as the “execution time” or
+  “running time” of the algorithm.
+
+  [[file:listing/sumOf2.py]]
+
+  [[file:activeCode/sumOf3.py]]
+* 3.3. Big-O Notation
+  When trying to characterize an algorithm’s efficiency in terms of execution
+  time, independent of any particular program or computer, it is important to
+  quantify the number of operations or steps that the algorithm will require.
+  
+  𝑇(𝑛)=1+𝑛. The parameter n is often referred to as the “size of the problem,”
+  and we can read this as “T(n) is the time it takes to solve a problem of size
+  n, namely 1+n steps.”
+
+  Our goal then is to show how the algorithm’s execution time changes with
+  respect to the size of the problem.
+
+  The order of magnitude function describes the part of 𝑇(𝑛) that increases the
+  fastest as the value of n increases. Order of magnitude is often called Big-O
+  notation (for “order”) and written as 𝑂(𝑓(𝑛)). It provides a useful
+  approximation to the actual number of steps in the computation. The function
+  𝑓(𝑛) provides a simple representation of the dominant part of the original
+  𝑇(𝑛).
+
+  𝑇(𝑛)=1+𝑛 :: running time is 𝑂(𝑛)
+
+  𝑇(𝑛)=5𝑛^2+27𝑛+1005 function 𝑇(𝑛) has an order of magnitude 𝑓(𝑛)=𝑛^2, or simply
+  that it is 𝑂(𝑛^2).
+
+  we need to characterize their performance in terms of best case, worst case,
+  or average case performance.
+
+  Table 1: Common Functions for Big-O
+  | f(n)  | Name        |
+  | 1     | Constant    |
+  | log𝑛  | Logarithmic |
+  | 𝑛     | Linear      |
+  | 𝑛log𝑛 | Log Linear  |
+  | 𝑛^2   | Quadratic   |
+  | 𝑛^3   | Cubic       |
+  | 2^𝑛   | Exponential |
+
+  [[file:figure/Figure%201:%20Plot%20of%20Common%20Big-O%20Functions.png][Plot of Common Big-O Functions]]
+
+  [[file:listing/2.py]]
+
+  𝑇(𝑛)=3+3𝑛2+2𝑛+1=3𝑛2+2𝑛+4    𝑂(𝑛2)
+* 3.4. An Anagram Detection Example
+** 3.4.1. Solution 1: Checking Off
+   [[file:activeCode/anagramSolution1.py]]
+
+   \begin{equation}
+     \LARGE
+     \sum_{i=1}^{n}i = \frac{n(n+1)}{2} = \frac{1}{2}n^2 + \frac{1}{2}n
+   \end{equation}
+
+   𝑂(𝑛^2)
+** 3.4.2. Solution 2: Sort and Compare
+   [[file:activeCode/anagramSolution2.py]]
+
+   sorting operations dominate the iteration.
+** 3.4.3. Solution 3: Brute Force
+   A *brute force* technique for solving a problem typically tries to exhaust
+   all possibilities.
+
+   𝑛∗(𝑛−1)∗(𝑛−2)∗...∗3∗2∗1 , which is 𝑛!
+
+   It turns out that 𝑛! grows even faster than 2𝑛 as n gets large.
+** 3.4.4. Solution 4: Count and Compare
+   [[file:activeCode/anagramSolution4.py]]
+
+   𝑇(𝑛)=2𝑛+26 steps. That is 𝑂(𝑛).
+
+   this algorithm sacrificed space in order to gain time.
+* 3.5. Performance of Python Data Structures
+* 3.6. Lists
+  indexing and assigning 𝑂(1).
+
+  Another very common programming task is to grow a list. 
+  - append :: O(1)
+  - concatenation :: O(k) 
+
+
+  [[file:listing/lists.py]]
+
+  Table 2: Big-O Efficiency of Python List Operators
+  Operation    Big-O Efficiency
+  index []    O(1)
+  index assignment    O(1)
+  append    O(1)
+  pop()    O(1)
+  pop(i)    O(n)
+  insert(i,item)    O(n)
+  del operator    O(n)
+  iteration    O(n)
+  contains (in)    O(n)
+  get slice [x:y]    O(k)
+  del slice    O(n)
+  set slice    O(n+k)
+  reverse    O(n)
+  concatenate    O(k)
+  sort    O(n log n)
+  multiply    O(nk)
+* 3.7. Dictionaries
+  Table 3: Big-O Efficiency of Python Dictionary Operations
+  operation Big-O Efficiency
+  copy O(n)
+  get item O(1)
+  set item O(1)
+  delete item O(1)
+  contains (in) O(1)
+  iteration O(n)
+
+  [[file:listing/dictionaries.py]]
+
+  https://wiki.python.org/moin/TimeComplexity
+* 3.8. Summary
+  - Algorithm analysis is an implementation-independent way of measuring an
+    algorithm.
+
+  - Big-O notation allows algorithms to be classified by their dominant process
+    with respect to the size of the problem.
+* 3.9. Key Terms
+* 3.10. Discussion Questions
+* 3.11. Programming Exercises
