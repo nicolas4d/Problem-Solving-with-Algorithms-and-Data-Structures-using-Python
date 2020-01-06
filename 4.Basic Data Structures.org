@@ -1,0 +1,323 @@
+* 4.1. Objectives
+* 4.2. What Are Linear Structures?
+  Stacks, queues, deques, and lists are examples of data collections whose items
+  are ordered depending on how they are added or removed. Once an item is added,
+  it stays in that position relative to the other elements that came before and
+  came after it. Collections such as these are often referred to as *linear data
+  structures*.
+* 4.3. What is a Stack?
+  A *stack* (sometimes called a “push-down stack”) is an ordered collection of
+  items where the addition of new items and the removal of existing items always
+  takes place at the same end. This end is commonly referred to as the “top.”
+  The end opposite the top is known as the “base.”
+
+  The most recently added item is the one that is in position to be removed
+  first. This ordering principle is sometimes called *LIFO, last-in first-out*
+
+  Newer items are near the top, while older items are near the base
+
+  [[file:figure/Figure%203:%20The%20Reversal%20Property%20of%20Stacks.png][The Reversal Property of Stacks]]
+* 4.4. The Stack Abstract Data Type
+  A stack is structured, as an ordered collection of items where items are added
+  to and removed from the end called the “top.” Stacks are ordered LIFO. The
+  stack operations are given below.
+  - Stack() :: creates a new stack that is empty. It needs no parameters and
+               returns an empty stack.
+  - push(item) :: adds a new item to the top of the stack. It needs the item and
+                  returns nothing.
+  - pop() :: removes the top item from the stack. It needs no parameters and
+             returns the item. The stack is modified.
+  - peek() :: returns the top item from the stack but does not remove it. It
+              needs no parameters. The stack is not modified.
+  - isEmpty() :: tests to see whether the stack is empty. It needs no parameters
+                 and returns a boolean value.
+  - size() :: returns the number of items on the stack. It needs no parameters
+              and returns an integer.
+* 4.5. Implementing a Stack in Python
+  [[file:activeCode/stack.py]]
+
+  The pythonds module contains implementations of all data structures discussed
+  in this book. It is structured according to the sections: basic, trees, and
+  graphs. The module can be downloaded from GitHub. or installed from the
+  command line using pip install pythonds.
+
+  [[file:activeCode/stack-2.py]]
+* 4.6. Simple Balanced Parentheses
+  *Balanced parentheses* means that each opening symbol has a corresponding
+  closing symbol and the pairs of parentheses are properly nested.
+
+  [[file:figure/Figure%204:%20Matching%20Parentheses.png][Matching Parentheses]]
+
+  [[file:activeCode/parChecker.py]]
+  
+* 4.7. Balanced Symbols (A General Case)
+  [[file:activeCode/parChecker.py]]
+* 4.8. Converting Decimal Numbers to Binary Numbers
+  [[file:figure/Figure%205:%20Decimal-to-Binary%20Conversion.png][Decimal-to-Binary Conversion]]
+
+  [[file:activeCode/divideBy2.py]]
+
+  [[file:activeCode/baseConverter.py]]
+* 4.9. Infix, Prefix and Postfix Expressions
+** ^
+   *infix* since the operator is in between the two operands that work on.
+
+   Each operator has a precedence level.
+
+   write an expression that guarantees there will be no confusion with respect
+   to the order of operations is to create what is called a *fully parenthesized
+   expression*.
+
+   *Prefix expression* notation requires that all operators precede the two
+   operands that they work on.
+
+   *Postfix* requires that its operators come after the corresponding operands.
+
+   Table 2: Examples of Infix, Prefix, and Postfix
+   Infix Expression    Prefix Expression    Postfix Expression
+   A + B               + A B                A B + 
+   A + B * C           + A * B C            A B C * +
+** 4.9.1. Conversion of Infix Expressions to Prefix and Postfix
+   [[file:figure/Figure%206:%20Moving%20Operators%20to%20the%20Right%20for%20Postfix%20Notation.png][Moving Operators to the Right for Postfix Notation]]
+
+   [[file:figure/Figure%207:%20Moving%20Operators%20to%20the%20Left%20for%20Prefix%20Notation.png][Moving Operators to the Left for Prefix Notation]]
+
+   [[file:figure/Figure%208:%20Converting%20a%20Complex%20Expression%20to%20Prefix%20and%20Postfix%20Notations.png][Converting a Complex Expression to Prefix and Postfix Notations]]
+** 4.9.2. General Infix-to-Postfix Conversion
+   steps will produce a string of tokens in postfix order:
+   1. Create an empty stack called opstack for keeping operators. Create an
+      empty list for output.
+   2. Convert the input infix string to a list by using the string method split.
+   3. Scan the token list from left to right.
+      - If the token is an operand, append it to the end of the output list.
+      - If the token is a left parenthesis, push it on the opstack.
+      - If the token is a right parenthesis, pop the opstack until the
+        corresponding left parenthesis is removed. Append each operator to the
+        end of the output list.
+      - If the token is an operator, *, /, +, or -, push it on the opstack.
+        However, first remove any operators already on the opstack that have
+        higher or equal precedence and append them to the output list.
+   4. When the input expression has been completely processed, check the
+      opstack. Any operators still on the stack can be removed and appended to
+      the end of the output list.
+
+      
+   [[file:activeCode/infixToPostfix.py]]
+** 4.9.3. Postfix Evaluation
+   [[file:figure/Figure%2010:%20Stack%20Contents%20During%20Evaluation.png][Stack Contents During Evaluation]]
+
+   [[file:figure/Figure%2011:%20A%20More%20Complex%20Example%20of%20Evaluation.png][A More Complex Example of Evaluation]]
+
+   Assume the postfix expression is a string of tokens delimited by spaces. The
+   operators are *, /, +, and - and the operands are assumed to be single-digit
+   integer values. The output will be an integer result.
+   1. Create an empty stack called operandStack.
+   2. Convert the string to a list by using the string method split.
+   3. Scan the token list from left to right.
+      - If the token is an operand, convert it from a string to an integer and
+        push the value onto the operandStack.
+      - If the token is an operator, *, /, +, or -, it will need two operands.
+        Pop the operandStack twice. The first pop is the second operand and the
+        second pop is the first operand. Perform the arithmetic operation. Push
+        the result back on the operandStack.
+   4. When the input expression has been completely processed, the result is on
+      the stack. Pop the operandStack and return the value.
+
+
+   [[file:activeCode/postfixEval.py]]
+* 4.10. What Is a Queue?
+  A queue is an ordered collection of items where the addition of new items
+  happens at one end, called the “rear,” and the removal of existing items
+  occurs at the other end, commonly called the “front.” As an element enters the
+  queue it starts at the rear and makes its way toward the front, waiting until
+  that time when it is the next element to be removed.
+
+  ordering principle is sometimes called FIFO, first-in first-out. It is also
+  known as “first-come first-served.”
+
+  [[file:figure/Figure%201:%20A%20Queue%20of%20Python%20Data%20Objects.png][A Queue of Python Data Objects]]
+* 4.11. The Queue Abstract Data Type
+  A queue is structured as an ordered collection of items which are added at one
+  end, called the “rear,” and removed from the other end, called the “front.”
+  Queues maintain a FIFO ordering property. The queue operations are given
+  below.
+  - Queue() :: creates a new queue that is empty. It needs no parameters and
+               returns an empty queue.
+  - enqueue(item) :: adds a new item to the rear of the queue. It needs the item
+                     and returns nothing.
+  - dequeue() :: removes the front item from the queue. It needs no parameters
+                 and returns the item. The queue is modified.
+  - isEmpty() :: tests to see whether the queue is empty. It needs no parameters
+                 and returns a boolean value.
+  - size() :: returns the number of items in the queue. It needs no parameters
+              and returns an integer.
+* 4.12. Implementing a Queue in Python
+  Recall that this also means that enqueue will be O(n) and dequeue will be O(1).
+
+  [[file:listing/Queue.py]]
+  
+* 4.13. Simulation: Hot Potato
+  [[file:figure/Figure%202:%20A%20Six%20Person%20Game%20of%20Hot%20Potato.png][A Six Person Game of Hot Potato]]
+
+  [[file:activeCode/hotPotato.py]]
+* 4.14. Simulation: Printing Tasks
+** ^
+   [[file:figure/Figure%204:%20Computer%20Science%20Laboratory%20Printing%20Queue.png][Computer Science Laboratory Printing Queue]]
+** 4.14.1. Main Simulation Steps
+** 4.14.2. Python Implementation
+   [[file:listing/printer.py]]
+** 4.14.3. Discussion
+* 4.15. What Is a Deque?
+  deque, also known as a double-ended queue, is an ordered collection of items
+  similar to the queue
+
+  [[file:figure/Figure%201:%20A%20Deque%20of%20Python%20Data%20Objects.png][A Deque of Python Data Objects]]
+* 4.16. The Deque Abstract Data Type
+  A deque is structured as an ordered collection of items where items are added
+  and removed from either end, either front or rear. The deque operations are
+  given below.
+  - Deque() :: creates a new deque that is empty. It needs no parameters and
+               returns an empty deque.
+  - addFront(item) :: adds a new item to the front of the deque. It needs the
+                      item and returns nothing.
+  - addRear(item) :: adds a new item to the rear of the deque. It needs the item
+                     and returns nothing.
+  - removeFront() :: removes the front item from the deque. It needs no
+                     parameters and returns the item. The deque is modified.
+  - removeRear() :: removes the rear item from the deque. It needs no parameters
+                    and returns the item. The deque is modified.
+  - isEmpty() :: tests to see whether the deque is empty. It needs no parameters
+                 and returns a boolean value.
+  - size() :: returns the number of items in the deque. It needs no parameters
+              and returns an integer.
+* 4.17. Implementing a Deque in Python
+  [[file:listing/dequee.py]]
+
+  adding and removing items from the *front* is O(1) whereas adding and
+  removing from the *rear* is O(n).
+* 4.18. Palindrome-Checker
+  A palindrome is a string that reads the same forward and backward, for
+  example, radar, toot, and madam.
+
+  [[file:figure/Figure%202:%20A%20Deque.png][A Deque]]
+
+  [[file:activeCode/palchecker.py]]
+* TODO 4.19. Lists
+  A list is a collection of items where each item holds a relative position with
+  respect to the others.
+* 4.20. The Unordered List Abstract Data Type
+  The structure of an unordered list is a collection of items where each item
+  holds a relative position with respect to the others.
+  - List() :: creates a new list that is empty. It needs no parameters and
+              returns an empty list.
+  - add(item) :: adds a new item to the list. It needs the item and returns
+                 nothing. Assume the item is not already in the list.
+  - remove(item) :: removes the item from the list. It needs the item and
+                    modifies the list. Assume the item is present in the list.
+  - search(item) :: searches for the item in the list. It needs the item and
+                    returns a boolean value.
+  - isEmpty() :: tests to see whether the list is empty. It needs no parameters
+                 and returns a boolean value.
+  - size() :: returns the number of items in the list. It needs no parameters
+              and returns an integer.
+  - append(item) :: adds a new item to the end of the list making it the last
+                    item in the collection. It needs the item and returns
+                    nothing. Assume the item is not already in the list.
+  - index(item) :: returns the position of item in the list. It needs the item
+                   and returns the index. Assume the item is in the list.
+  - insert(pos,item) :: adds a new item to the list at position pos. It needs
+       the item and returns nothing. Assume the item is not already in the list
+       and there are enough existing items to have position pos.
+  - pop() :: removes and returns the last item in the list. It needs nothing and
+             returns an item. Assume the list has at least one item.
+  - pop(pos) :: removes and returns the item at position pos. It needs the
+                position and returns the item. Assume the item is in the list.
+* 4.21. Implementing an Unordered List: Linked Lists
+** ^
+   The external reference is often referred to as the *head* of the list.
+
+   [[file:figure/Figure%202:%20Relative%20Positions%20Maintained%20by%20Explicit%20Links.png][Relative Positions Maintained by Explicit Links]]
+** 4.21.1. The Node Class
+   The basic building block for the linked list implementation is the *node*.
+
+   [[file:listing/node.py]]
+** 4.21.2. The Unordered List Class
+   [[file:listing/UnorderedList.py]]
+
+   It is very important to note that the list class itself does not contain any
+   node objects. Instead it contains a single reference to only the first node
+   in the linked structure.
+
+   Traversal refers to the process of systematically visiting each node.
+* 4.22. The Ordered List Abstract Data Type
+  Many of the ordered list operations are the same as those of the unordered
+  list.
+  - OrderedList() :: creates a new ordered list that is empty. It needs no
+                     parameters and returns an empty list.
+  - add(item) :: adds a new item to the list making sure that the order is
+                 preserved. It needs the item and returns nothing. Assume the
+                 item is not already in the list.
+  - remove(item) :: removes the item from the list. It needs the item and
+                    modifies the list. Assume the item is present in the list.
+  - search(item) :: searches for the item in the list. It needs the item and
+                    returns a boolean value.
+  - isEmpty() :: tests to see whether the list is empty. It needs no parameters
+                 and returns a boolean value.
+  - size() :: returns the number of items in the list. It needs no parameters
+              and returns an integer.
+  - index(item) :: returns the position of item in the list. It needs the item
+                   and returns the index. Assume the item is in the list.
+  - pop() :: removes and returns the last item in the list. It needs nothing and
+             returns an item. Assume the list has at least one item.
+  - pop(pos) :: removes and returns the item at position pos. It needs the
+                position and returns the item. Assume the item is in the list.
+* 4.23. Implementing an Ordered List
+** ^
+   [[file:activeCode/OrderedList.py]]
+   [[file:code/OrderedList.py]]
+** 4.23.1. Analysis of Linked Lists
+   Consider a linked list that has *n* nodes.
+ 
+   isEmpty 𝑂(1)
+   size O(n)
+   Adding item to an unordered list will always be O(1)
+   search and remove, as well as add for ordired list  O(n)
+* 4.24. Summary
+  - Linear data structures maintain their data in an ordered fashion.
+  - Stacks are simple data structures that maintain a LIFO, last-in first-out,
+    ordering.
+  - The fundamental operations for a stack are push, pop, and isEmpty.
+  - Queues are simple data structures that maintain a FIFO, first-in first-out,
+    ordering.
+  - The fundamental operations for a queue are enqueue, dequeue, and isEmpty.
+  - Prefix, infix, and postfix are all ways to write expressions.
+  - Stacks are very useful for designing algorithms to evaluate and translate
+    expressions.
+  - Stacks can provide a reversal characteristic.
+  - Queues can assist in the construction of timing simulations.
+  - Simulations use random number generators to create a real-life situation and
+    allow us to answer “what if” types of questions.
+  - Deques are data structures that allow hybrid behavior like that of stacks
+    and queues.
+  - The fundamental operations for a deque are addFront, addRear, removeFront,
+    removeRear, and isEmpty.
+  - Lists are collections of items where each item holds a relative position.
+  - A linked list implementation maintains logical order without requiring
+    physical storage requirements.
+  - Modification to the head of the linked list is a special case.
+* 4.25. Key Terms
+* 4.26. Discussion Questions
+* 4.27. Programming Exercises
+* code
+  [[file:code/revstring.py]]
+  [[file:code/stack.py]]
+  [[file:code/parChecker.py]]
+  [[file:code/baseConverter.py]]
+  [[file:code/infixToPostfix.py]]
+  [[file:code/postfixEval.py]]
+  [[file:code/Queue.py]]
+  [[file:code/hotPotato.py]]
+  [[file:code/printer.py]]
+  [[file:code/dequee.py]]
+  [[file:code/palchecker.py]]
+  [[file:code/UnorderedList.py]]
