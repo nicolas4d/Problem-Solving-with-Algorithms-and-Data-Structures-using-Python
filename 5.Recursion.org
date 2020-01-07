@@ -1,0 +1,170 @@
+* 5.1. Objectives
+* 5.2. What Is Recursion?
+  Recursion is a method of solving problems that involves breaking a problem
+  down into smaller and smaller subproblems until you get to a small enough
+  problem that it can be solved trivially.
+* 5.3. Calculating the Sum of a List of Numbers
+  [[file:activeCode/listsum.py]]
+  [[file:code/listsum.py]]
+
+  A recursive function is a function that calls itself.
+* 5.4. The Three Laws of Recursion
+  1. A recursive algorithm must have a base case.
+  2. A recursive algorithm must change its state and move toward the base case.
+  3. A recursive algorithm must call itself, recursively.
+* 5.5. Converting an Integer to a String in Any Base
+  1. Reduce the original number to a series of single-digit numbers.
+  2. Convert the single digit-number to a string using a lookup.
+  3. Concatenate the single-digit strings together to form the final result.
+
+     
+  [[file:activeCode/toStr.py]]
+  [[file:code/toStr.py]]
+  [[file:code/reverseStr.py]]
+  [[file:code/palindrome.py]]
+* 5.6. Stack Frames: Implementing Recursion
+  [[file:activeCode/toStr.py]]
+* 5.7. Introduction: Visualizing Recursion
+  [[file:activeCode/drawSpiral.py]]
+
+  fractal is that when you look at it the fractal has the same basic shape no
+  matter how much you magnify it.
+  
+  [[file:activeCode/visualizingRecursion.py]]
+  [[file:code/visualizingRecursion.py]]
+  [[file:code/visualizingRecursionEx.py]]
+* 5.8. Sierpinski Triangle
+  [[file:activeCode/sierpinski.py]]
+  [[file:code/sierpinski.py]]
+
+  [[file:figure/Figure%204:%20Building%20a%20Sierpinski%20Triangle.png][Building a Sierpinski Triangle]]
+* 5.9. Complex Recursive Problems
+* 5.10. Tower of Hanoi
+  1. Move a tower of height-1 to an intermediate pole, using the final pole.
+  2. Move the remaining disk to the final pole.
+  3. Move the tower of height-1 from the intermediate pole to the final pole using
+     the original pole.
+
+     
+  [[file:activeCode/hanoi.py]]
+* 5.11. Exploring a Maze
+  [[file:figure/Figure%202:%20The%20Finished%20Maze%20Search%20Program.png][The Finished Maze Search Program]]
+
+  - From our starting position we will first try going North one square and then
+    recursively try our procedure from there.
+  - If we are not successful by trying a Northern path as the first step then we
+    will take a step to the South and recursively repeat our procedure.
+  - If South does not work then we will try a step to the West as our first step
+    and recursively apply our procedure.
+  - If North, South, and West have not been successful then apply the procedure
+    recursively from a position *one step to our East*.
+  - If none of these directions works then there is no way to get out of the
+    maze and we fail.
+
+    
+  four base cases to consider:
+  - The turtle has run into a wall. Since the square is occupied by a wall no
+    further exploration can take place.
+  - The turtle has found a square that has already been explored. We do not want
+    to continue exploring from this position or we will get into a loop.
+  - We have found an outside edge, not occupied by a wall. In other words we
+    have found an exit from the maze.
+  - We have explored a square unsuccessfully in all four directions.
+
+    
+  The maze object will provide the following methods for us to use in writing
+  our search algorithm:
+  - __init__ :: Reads in a data file representing a maze, initializes the
+                internal representation of the maze, and finds the starting
+                position for the turtle.
+  - drawMaze :: Draws the maze in a window on the screen.
+  - updatePosition :: Updates the internal representation of the maze and
+                      changes the position of the turtle in the window.
+  - isExit :: Checks to see if the current position is an exit from the maze.
+
+              
+  [[file:activeCode/maze.py]]
+  [[file:activeCode/maze2.txt]]
+  [[file:code/maze.py]]
+  [[file:code/maze2.txt]]
+* 5.12. Dynamic Programming
+  - Dynamic programming ::  strategy for optimization problems.
+  - greedy method :: try to solve as big a piece of the problem as possible
+                     right away.
+
+  [[file:listing/recMC.py]]
+  [[file:code/recMC.py]]
+
+  [[file:figure/Figure%203:%20Call%20Tree%20for%20Listing%207.png][Call Tree]] wasting a lot of time and effort recalculating old results.
+  
+  [[file:activeCode/recDC.py]]
+  [[file:code/recDC.py]]
+
+  In fact the term for what we have done is not dynamic programming but rather
+  we have improved the performance of our program by using a technique known as
+  “memoization,” or more commonly called “caching.”
+
+  [[file:figure/Figure%204:%20Minimum%20Number%20of%20Coins%20Needed%20to%20Make%20Change.png][Minimum Number of Coins Needed to Make Change]]
+
+  [[file:figure/Figure%205:%20Three%20Options%20to%20Consider%20for%20the%20Minimum%20Number%20of%20Coins%20for%20Eleven%20Cents.png][Three Options to Consider for the Minimum Number of Coins for Eleven Cents]]
+
+  [[file:listing/dpMakeChange.py]]
+  [[file:code/dpMakeChange.py]]
+
+  [[file:activeCode/dpMakeChangeTrack.py]]
+  [[file:code/dpMakeChangeTrack.py]]
+* 5.13. Summary
+  - All recursive algorithms must have a base case.
+  - A recursive algorithm must change its state and make progress toward the
+    base case.
+  - A recursive algorithm must call itself (recursively).
+  - Recursion can take the place of iteration in some cases.
+  - Recursive algorithms often map very naturally to a formal expression of the
+    problem you are trying to solve.
+  - Recursion is not always the answer. Sometimes a recursive solution may be
+    more computationally expensive than an alternative algorithm.
+* 5.14. Key Terms
+* 5.15. Discussion Questions
+* 5.16. Glossary
+  - base case
+  A branch of the conditional statement in a recursive function that does not
+  give rise to further recursive calls.
+  - data structure
+  An organization of data for the purpose of making it easier to use.
+  - exception
+  An error that occurs at runtime.
+  - handle an exception
+  To prevent an exception from terminating a program by wrapping the block of
+  code in a try / except construct.
+  - immutable data type
+  A data type which cannot be modified. Assignments to elements or slices of
+  immutable types cause a runtime error.
+  - infinite recursion
+  A function that calls itself recursively without ever reaching the base case.
+  Eventually, an infinite recursion causes a runtime error.
+  - mutable data type
+  A data type which can be modified. All mutable types are compound types. Lists
+  and dictionaries (see next chapter) are mutable data types; strings and tuples
+  are not.
+  - raise
+  To cause an exception by using the raise statement.
+  - recursion
+  The process of calling the function that is already executing.
+  - recursive call
+  The statement that calls an already executing function. Recursion can even be
+  indirect — function f can call g which calls h, and h could make a call back
+  to f.
+  - recursive definition
+  A definition which defines something in terms of itself. To be useful it must
+  include base cases which are not recursive. In this way it differs from a
+  circular definition. Recursive definitions often provide an elegant way to
+  express complex data structures.
+  - tuple
+  A data type that contains a sequence of elements of any type, like a list, but
+  is immutable. Tuples can be used wherever an immutable type is required, such
+  as a key in a dictionary (see next chapter).
+  - tuple assignment
+  An assignment to all of the elements in a tuple using a single assignment
+  statement. Tuple assignment occurs in parallel rather than in sequence, making
+  it useful for swapping values.
+* 5.17. Programming Exercises
