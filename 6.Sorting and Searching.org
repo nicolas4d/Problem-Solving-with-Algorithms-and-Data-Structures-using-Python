@@ -1,0 +1,348 @@
+* 6.1. Objectives
+* 6.2. Searching
+  Searching is the algorithmic process of finding a particular item in a
+  collection of items.
+
+  [[file:example/searching.py]]
+  [[file:code/searching.py]]
+* 6.3. The Sequential Search
+** ^
+   [[file:figure/Figure%201:%20Sequential%20Search%20of%20a%20List%20of%20Integers.png][Sequential Search of a List of Integers]]
+
+   [[file:codelends/sequentialSearch.py]]
+   [[file:code/sequentialSearch.py]]
+** 6.3.1. Analysis of Sequential Search
+   [[file:table/Table%201:%20Comparisons%20Used%20in%20a%20Sequential%20Search%20of%20an%20Unordered%20List.png][Comparisons Used in a Sequential Search of an Unordered List]]
+
+   [[file:codelends/orderedSequentialSearch.py]]
+   [[file:code/orderedSequentialSearch.py]]
+
+   [[file:table/Table%202:%20Comparisons%20Used%20in%20Sequential%20Search%20of%20an%20Ordered%20List.png][Comparisons Used in Sequential Search of an Ordered List]]
+* 6.4. The Binary Search
+** ^
+   [[file:figure/Figure%203:%20Binary%20Search%20of%20an%20Ordered%20List%20of%20Integers.png][Binary Search of an Ordered List of Integers]]
+
+   [[file:codelends/binarySearch.py]]
+   [[file:code/binarySearch.py]]
+
+   Divide and conquer means that we divide the problem into smaller pieces,
+   solve the smaller pieces in some way, and then reassemble the whole problem
+   to get the result.
+** 6.4.1. Analysis of Binary Search
+   [[file:table/Table%203:%20Tabular%20Analysis%20for%20a%20Binary%20Search.png][Tabular Analysis for a Binary Search]]
+
+   The number of comparisons necessary to get to this point is i where
+   \begin{equation}
+     \LARGE
+     \frac{n}{2^i} = 1
+   \end{equation}
+   Solving for i gives us 𝑖=log𝑛. The maximum number of comparisons is
+   logarithmic with respect to the number of items in the list. Therefore, the
+   binary search is 𝑂(log𝑛).
+
+   slice operator in Python is actually O(k). 
+
+   important to note that for small values of n, the additional cost of sorting
+   is probably not worth it. If we can sort once and then search many times, the
+   cost of the sort is not so significant. However, for large lists, sorting
+   even once can be so expensive that simply performing a sequential search from
+   the start may be the best choice.
+* 6.5. Hashing
+** ^ 
+   A hash table is a collection of items which are stored in such a way as to
+   make it easy to find them later. Each position of the hash table, often
+   called a *slot*, can hold an item and is named by an integer value starting
+   at 0.
+
+   [[file:figure/Figure%204:%20Hash%20Table%20with%2011%20Empty%20Slots.png][Hash Table with 11 Empty Slots]]
+
+   The mapping between an item and the slot where that item belongs in the hash
+   table is called the *hash function*.
+
+   *remainder method* simply takes an item and divides it by the table size,
+   returning the remainder as its hash value ( ℎ(𝑖𝑡𝑒𝑚) = 𝑖𝑡𝑒𝑚 % 11 ).
+
+   *load factor* commonly denoted by
+   \begin{equation}
+     \LARGE
+     \lambda = \frac{numberofitems}{tablesize}
+   \end{equation}
+   
+   According to the hash function, two or more items would need to be in the
+   same slot. This is referred to as a *collision* (it may also be called a
+   “clash”).
+** 6.5.1. Hash Functions
+   Given a collection of items, a hash function that maps each item into a
+   unique slot is referred to as a *perfect hash function*.
+
+   Our goal is to create a hash function that minimizes the number of
+   collisions, is easy to compute, and evenly distributes the items in the hash
+   table.
+
+   *folding method* for constructing hash functions begins by dividing the item
+   into equal-size pieces (the last piece may not be of equal size). These
+   pieces are then added together to give the resulting hash value.
+
+   436-555-4601
+   43,65,55,46,01
+   43+65+55+46+01 = 210
+   210 % 11 = 1
+
+   *mid-square method*. We first square the item, and then extract some portion
+   of the resulting digits.
+
+   44^2=1,936 
+   (93 % 11) = 5
+
+   [[file:figure/Figure%206:%20Hashing%20a%20String%20Using%20Ordinal%20Values.png][Hashing a String Using Ordinal Values]]
+
+   #+begin_src python
+   def hash(astring, tablesize):
+    sum = 0
+    for pos in range(len(astring)):
+        sum = sum + ord(astring[pos])
+
+    return sum%tablesize
+   #+end_src
+
+   [[file:figure/Figure%207:%20Hashing%20a%20String%20Using%20Ordinal%20Values%20with%20Weighting.png][Hashing a String Using Ordinal Values with Weighting]]
+
+   important thing to remember is that the hash function has to be efficient so
+   that it does not become the dominant part of the storage and search process.
+   If the hash function is too complex, then it becomes more work to compute the
+   slot name than it would be to simply do a basic sequential or binary search
+   as described earlier.
+** 6.5.2. Collision Resolution
+   When two items hash to the same slot, we must have a systematic method for
+   placing the second item in the hash table. This process is called *collision
+   resolution*.
+
+   *open addressing* in that it tries to find the next open slot or address in
+   the hash table. By systematically visiting each slot one at a time, we are
+   performing an open addressing technique called *linear probing*.
+
+   A disadvantage to linear probing is the tendency for *clustering*; items
+   become clustered in the table.
+
+   The general name for looking for another slot after a collision is
+   *rehashing*
+
+   linear probing, the rehash function is
+   newhashvalue = rehash(oldhashvalue)
+   where 
+   rehash(pos) = (pos + 1) % sizeoftable.
+   In general, 
+   rehash(pos) = (pos + skip) % sizeoftable.
+ 
+   It is important to note that the size of the “skip” must be such that all the
+   slots in the table will eventually be visited. Otherwise, part of the table
+   will be unused. To ensure this, it is often suggested that the table size be
+   a *prime number*.
+
+   *quadratic probing*. the i will be i^2 𝑟𝑒ℎ𝑎𝑠ℎ(𝑝𝑜𝑠)=(ℎ+𝑖^2).
+
+   *Chaining* allows many items to exist at the same location in the hash
+   table.
+
+   [[file:figure/Figure%2012:%20Collision%20Resolution%20with%20Chaining.png][Collision Resolution with Chaining]]
+** 6.5.3. Implementing the Map Abstract Data Type
+   a dictionary is an associative data type where you can store key–data pairs.
+   The key is used to look up the associated data value. We often refer to this
+   idea as a *map*.
+
+   The map abstract data type is defined as follows. The structure is an
+   unordered collection of associations between a key and a data value. The keys
+   in a map are all unique so that there is a one-to-one relationship between a
+   key and a value. The operations are given below.
+   - Map() :: Create a new, empty map. It returns an empty map collection.
+   - put(key,val) :: Add a new key-value pair to the map. If the key is already
+                     in the map then replace the old value with the new value.
+   - get(key) :: Given a key, return the value stored in the map or None
+                 otherwise.
+   - del :: Delete the key-value pair from the map using a statement of the form
+            del map[key].
+   - len() :: Return the number of key-value pairs stored in the map.
+   - in :: Return True for a statement of the form key in map, if the given key
+           is in the map, False otherwise.
+
+           
+   [[file:activeCode/hashTable.py]]
+   [[file:code/hashTable.py]]
+** 6.5.4. Analysis of Hashing
+   in the best case hashing would provide a 𝑂(1), constant time search
+   technique.
+
+   - open addressing search average number of comparisons is approximately
+     - successful
+
+       \begin{equation}
+       \LARGE
+       \frac{1}{2} ( 1 + \frac{1}{1 - \lambda})
+       \end{equation}
+
+     - unsuccessful
+
+       \begin{equation}
+       \LARGE
+       \frac{1}{2} ( 1 + (\frac{1}{1 - \lambda})^2)
+       \end{equation}
+
+   - using chaining, the average number of comparisons is
+     - successful
+
+       \begin{equation}
+       \LARGE
+       1 + \frac{\lambda}{2}
+       \end{equation}
+
+     - unsuccessful 
+       \begin{equation}
+       \LARGE
+       \lambda
+       \end{equation}
+   
+* 6.6. Sorting
+  Sorting is the process of placing elements from a collection in some kind of
+  order.
+
+  For small collections, a complex sorting method may be more trouble than it is
+  worth. The overhead may be too high. On the other hand, for larger
+  collections, we want to take advantage of as many improvements as possible.
+* 6.7. The Bubble Sort
+  The bubble sort makes multiple passes through a list. It compares adjacent
+  items and exchanges those that are out of order. Each pass through the list
+  places the next largest value in its proper place. In essence, each item
+  “bubbles” up to the location where it belongs.
+
+  [[file:figure/Figure%201:%20bubbleSort:%20The%20First%20Pass.png][bubbleSort: The First Pass]]
+
+  [[file:figure/Figure%202:%20Exchanging%20Two%20Values%20in%20Python.png][Exchanging Two Values in Python]]
+
+  [[file:activeCode/bubbleSort.py]]
+  [[file:code/bubbleSort.py]]
+
+  the sum of the first n integers is 1/2 * 𝑛^2 + 1/2 * 𝑛. The sum of the first
+  𝑛−1 integers is 1/2 * 𝑛^2 + 1/2 * 𝑛 - n, which is 1/2 * 𝑛^2 - 1/2 * 𝑛. This is
+  still 𝑂(𝑛^2) comparisons.
+
+  [[file:table/Table%201:%20Comparisons%20for%20Each%20Pass%20of%20Bubble%20Sort.png][Comparisons for Each Pass of Bubble Sort]]
+
+  [[file:activeCode/shortBubbleSort.py]]
+  [[file:code/shortBubbleSort.py]]
+* 6.8. The Selection Sort
+  selection sort looks for the largest value as it makes a pass and, after
+  completing the pass, places it in the proper location.
+
+  [[file:figure/Figure%203:%20selectionSort.png][selectionSort]]
+
+  [[file:activeCode/selectionSort.py]]
+  [[file:code/selectionSort.py]]
+
+  𝑂(𝑛^2). 
+
+  due to the reduction in the number of exchanges, the selection sort typically
+  executes faster in benchmark studies.
+* 6.9. The Insertion Sort
+  The insertion sort, although still 𝑂(𝑛^2). It always maintains a sorted
+  sublist in the lower positions of the list. Each new item is then “inserted”
+  back into the previous sublist such that the sorted sublist is one item
+  larger.
+
+  [[file:figure/Figure%204:%20insertionSort.png][insertionSort]]
+
+  [[file:figure/Figure%205:%20insertionSort:%20Fifth%20Pass%20of%20the%20Sort.png][insertionSort: Fifth Pass of the Sort]]
+
+  The maximum number of comparisons for an insertion sort is the sum of the
+  first 𝑛−1 integers. Again, this is 𝑂(𝑛^2). However, in the best case, only one
+  comparison needs to be done on each pass. This would be the case for an
+  already sorted list.
+
+  [[file:activeCode/insertionSort.py]]
+  [[file:code/insertionSort.py]]
+* 6.10. The Shell Sort
+  The shell sort, sometimes called the “diminishing increment sort,” improves on
+  the insertion sort by breaking the original list into a number of smaller
+  sublists, each of which is sorted using an insertion sort. the shell sort uses
+  an increment i, sometimes called the *gap*, to create a sublist by choosing
+  all items that are i items apart.
+
+  [[file:figure/Figure%206:%20A%20Shell%20Sort%20with%20Increments%20of%20Three.png][A Shell Sort with Increments of Three]]
+  [[file:figure/Figure%207:%20A%20Shell%20Sort%20after%20Sorting%20Each%20Sublist.png][A Shell Sort after Sorting Each Sublist]]
+  [[file:figure/Figure%208:%20ShellSort:%20A%20Final%20Insertion%20Sort%20with%20Increment%20of%201.png][ShellSort: A Final Insertion Sort with Increment of 1]]
+  [[file:activeCode/shellSort.py]]
+  [[file:code/shellSort.py]]
+
+  it tends to fall somewhere between 𝑂(𝑛) and 𝑂(𝑛^2). By changing the increment,
+  for example using 2^(𝑘−1) (1, 3, 7, 15, 31, and so on), a shell sort can
+  perform at 𝑂(𝑛^(3/2)).
+* 6.11. The Merge Sort
+  Merge sort is a recursive algorithm that continually splits a list in half. If
+  the list is empty or has one item, it is sorted by definition (the base case).
+  If the list has more than one item, we split the list and recursively invoke a
+  merge sort on both halves. Once the two halves are sorted, the fundamental
+  operation, called a merge, is performed. Merging is the process of taking two
+  smaller sorted lists and combining them together into a single, sorted, new
+  list.
+
+  [[file:figure/Figure%2010:%20Splitting%20the%20List%20in%20a%20Merge%20Sort.png][Splitting the List in a Merge Sort]]
+  
+  [[file:figure/Figure%2011:%20Lists%20as%20They%20Are%20Merged%20Together.png][Lists as They Are Merged Together]]
+
+  [[file:activeCode/mergeSort.py]]
+  [[file:code/mergeSort.py]]
+
+  *stable algorithm* maintains the order of duplicate items in a list and is
+  preferred in most cases.
+  
+  we can divide a list in half log𝑛 times where n is the length of the list. The
+  second process is the merge. Each item in the list will eventually be
+  processed and placed on the sorted list. So the merge operation which results
+  in a list of size n requires n operations. The result of this analysis is that
+  log𝑛 splits, each of which costs 𝑛 for a total of 𝑛log𝑛 operations. A merge
+  sort is an 𝑂(𝑛log𝑛) algorithm.
+
+  the slicing operator is 𝑂(𝑘) where k is the size of the slice. In order to
+  guarantee that mergeSort will be 𝑂(𝑛log𝑛) we will need to remove the slice
+  operator.
+* 6.12. The Quick Sort
+  A quick sort first selects a value, which is called the *pivot value*.
+  Although there are many different ways to choose the pivot value, we will
+  simply use the first item in the list. The role of the pivot value is to
+  assist with splitting the list. The actual position where the pivot value
+  belongs in the final sorted list, commonly called the *split point*, will be
+  used to divide the list for subsequent calls to the quick sort.
+
+  [[file:figure/Figure%2013:%20Finding%20the%20Split%20Point%20for%2054.png][Finding the Split Point for 54]]
+
+  [[file:figure/Figure%2014:%20Completing%20the%20Partition%20Process%20to%20Find%20the%20Split%20Point%20for%2054.png][Completing the Partition Process to Find the Split Point for 54]]
+
+  [[file:activeCode/quickSort.py]]
+
+  note that for a list of length n, if the partition always occurs in the middle
+  of the list, there will again be log𝑛 divisions. In order to find the split
+  point, each of the n items needs to be checked against the pivot value. The
+  result is 𝑛log𝑛.
+
+  in the worst case, the split points may not be in the middle and can be very
+  skewed to the left or the right, leaving a very uneven division. In this case,
+  sorting a list of n items divides into sorting a list of 0 items and a list of
+  𝑛−1 items. Then sorting a list of 𝑛−1 divides into a list of size 0 and a list
+  of size 𝑛−2, and so on. The result is an 𝑂(𝑛^2) sort with all of the overhead
+  that recursion requires.
+  
+  *median of three*. To choose the pivot value, we will consider the first, the
+  middle, and the last element in the list.
+* 6.13. Summary
+  - A sequential search is 𝑂(𝑛) for ordered and unordered lists.
+  - A binary search of an ordered list is 𝑂(log𝑛) in the worst case.
+  - Hash tables can provide constant time searching.
+  - A bubble sort, a selection sort, and an insertion sort are 𝑂(𝑛2) algorithms.
+  - A shell sort improves on the insertion sort by sorting incremental sublists.
+    It falls between 𝑂(𝑛) and 𝑂(𝑛2).
+  - A merge sort is 𝑂(𝑛log𝑛), but requires additional space for the merging
+    process.
+  - A quick sort is 𝑂(𝑛log𝑛), but may degrade to 𝑂(𝑛2) if the split points are
+    not near the middle of the list. It does not require additional space.
+* 6.14. Key Terms
+* 6.15. Discussion Questions
+* 6.16. Programming Exercises
