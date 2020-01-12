@@ -1,0 +1,401 @@
+* 7.1. Objectives
+* 7.2. Examples of Trees
+  A tree data structure has a root, branches, and leaves. The difference between
+  a tree in nature and a tree in computer science is that a tree data structure
+  has its root at the top and its leaves on the bottom.
+
+  [[file:figure/Figure%201:%20Taxonomy%20of%20Some%20Common%20Animals%20Shown%20as%20a%20Tree.png][Taxonomy of Some Common Animals Shown as a Tree]]
+
+  property:
+  - trees are hierarchical.
+  - all of the children of one node are independent of the children of another
+    node.
+  - each leaf node is unique.
+  - you can move entire sections of a tree (called a *subtree*) to a different
+    position in the tree without affecting the lower levels of the hierarchy.
+* 7.3. Vocabulary and Definitions
+  - Node :: A node is a fundamental part of a tree. It can have a name, which we
+            call the “key.” A node may also have additional information. We call
+            this additional information the “payload.” While the payload
+            information is not central to many tree algorithms, it is often
+            critical in applications that make use of trees.
+  - Edge :: An edge is another fundamental part of a tree. An edge connects two
+            nodes to show that there is a relationship between them. Every node
+            (except the root) is connected by exactly one incoming edge from
+            another node. Each node may have several outgoing edges.
+  - Root :: The root of the tree is the only node in the tree that has no
+            incoming edges. 
+  - Path :: A path is an ordered list of nodes that are connected by edges.
+  - Children :: The set of nodes 𝑐 that have incoming edges from the same node
+                to are said to be the children of that node.
+  - Parent :: A node is the parent of all the nodes it connects to with outgoing
+              edges.
+  - Sibling :: Nodes in the tree that are children of the same parent are said
+               to be siblings.
+  - Subtree :: A subtree is a set of nodes and edges comprised of a parent and
+               all the descendants of that parent.
+  - Leaf Node :: A leaf node is a node that has no children.
+  - Level :: The level of a node 𝑛 is the number of edges on the path from the
+             root node to 𝑛. By definition, the level of the root node is zero.
+  - Height :: The height of a tree is equal to the maximum level of any node in
+              the tree.
+
+              
+  Definition One: A tree consists of a set of nodes and a set of edges that
+  connect pairs of nodes. A tree has the following properties:
+  - One node of the tree is designated as the root node.
+  - Every node 𝑛, except the root node, is connected by an edge from exactly one
+    other node 𝑝, where 𝑝 is the parent of 𝑛.
+  - A unique path traverses from the root to each node.
+  - If each node in the tree has a maximum of two children, we say that the tree
+    is a binary tree.
+
+    
+  [[file:figure/Figure%203:%20A%20Tree%20Consisting%20of%20a%20Set%20of%20Nodes%20and%20Edges.png][A Tree Consisting of a Set of Nodes and Edges]]
+
+  Definition Two: A tree is either empty or consists of a root and zero or more
+  subtrees, each of which is also a tree. The root of each subtree is connected
+  to the root of the parent tree by an edge.
+
+  [[file:figure/Figure%204:%20A%20recursive%20Definition%20of%20a%20tree.png][A recursive Definition of a tree]]
+* 7.4. List of Lists Representation
+  [[file:figure/Figure%201:%20A%20Small%20Tree.png][A Small Tree]]
+
+  [[file:activeCode/listTree.py]]
+  [[file:code/listTree.py]]
+* 7.5. Nodes and References
+  [[file:figure/Figure%202:%20A%20Simple%20Tree%20Using%20a%20Nodes%20and%20References%20Approach.png][A Simple Tree Using a Nodes and References Approach]]
+
+  [[file:activeCode/BinaryTree.py]]
+  [[file:code/BinaryTree.py]]
+* 7.6. Parse Tree
+  [[file:figure/Figure%202:%20Parse%20Tree%20for%20((7+3)%E2%88%97(5%E2%88%922)).png][Parse Tree for ((7+3)∗(5−2))]]
+
+  define four rules as follows:
+  - If the current token is a '(', add a new node as the left child of the
+    current node, and descend to the left child.
+  - If the current token is in the list ['+','-','/','*'], set the root value of
+    the current node to the operator represented by the current token. Add a new
+    node as the right child of the current node and descend to the right child.
+  - If the current token is a number, set the root value of the current node to
+    the number and return to the parent.
+  - If the current token is a ')', go to the parent of the current node.
+
+    
+  [[file:activeCode/parseTree.py]]
+  [[file:code/parseTree.py]]
+* 7.7. Tree Traversals
+  - preorder :: In a preorder traversal, we visit the root node first, then
+                recursively do a preorder traversal of the left subtree,
+                followed by a recursive preorder traversal of the right subtree.
+  - inorder :: In an inorder traversal, we recursively do an inorder traversal
+               on the left subtree, visit the root node, and finally do a
+               recursive inorder traversal of the right subtree.
+  - postorder :: In a postorder traversal, we recursively do a postorder
+                 traversal of the left subtree and the right subtree followed by
+                 a visit to the root node.
+
+
+  [[file:listing/preorder.py]]
+
+  [[file:listing/postorder.py]]
+
+  [[file:listing/inorder.py]]
+* 7.8. Priority Queues with Binary Heaps
+  A priority queue acts like a queue in that you dequeue an item by removing it
+  from the front. However, in a priority queue the logical order of items
+  inside a queue is determined by their priority.
+
+  A binary heap will allow us both enqueue and dequeue items in 𝑂(log𝑛).
+
+  min heap, in which the smallest key is always at the front, and the max heap,
+  in which the largest key value is always at the front.
+* 7.9. Binary Heap Operations
+  - BinaryHeap() :: creates a new, empty, binary heap.
+  - insert(k) :: adds a new item to the heap.
+  - findMin() :: returns the item with the minimum key value, leaving item in
+                 the heap.
+  - delMin() :: returns the item with the minimum key value, removing the item
+                from the heap.
+  - isEmpty() :: returns true if the heap is empty, false otherwise.
+  - size() :: returns the number of items in the heap.
+  - buildHeap(list) :: builds a new heap from a list of keys.
+
+       
+  [[file:activeCode/heap.py]]
+  [[file:code/heap.py]]
+* 7.10. Binary Heap Implementation
+** 7.10.1. The Structure Property
+   *balanced binary* tree has roughly the same number of nodes in the left and
+   right subtrees of the root. A *complete binary* tree is a tree in which each
+   level has all of its nodes. The exception to this is the bottom level of the
+   tree, which we fill in from left to right.
+
+   [[file:figure/Figure%201:%20A%20Complete%20Binary%20Tree.png][A Complete Binary Tree]]
+
+   Another interesting property of a complete tree is that we can represent it
+   using a single list.
+
+   parent is at position 𝑛/2.
+
+   the 2𝑝 and 2𝑝+1 relationship between parent and children.
+
+   [[file:figure/Figure%202:%20A%20Complete%20Binary%20Tree,%20along%20with%20its%20List%20Representation.png][A Complete Binary Tree, along with its List Representation]]
+** 7.10.2. The Heap Order Property
+   heap order property is as follows: In a heap, for every node 𝑥 with parent 𝑝,
+   the key in 𝑝 is smaller than or equal to the key in 𝑥.
+** 7.10.3. Heap Operations
+   [[file:activeCode/binHeap.py]]
+   [[file:code/binHeap.py]]
+
+   The assertion that we can build the heap in 𝑂(𝑛) may seem a bit mysterious at
+   first, and a proof is beyond the scope of this book. However, the key to
+   understanding that you can build the heap in 𝑂(𝑛) is to remember that the
+   log𝑛 factor is derived from the height of the tree. For most of the work in
+   buildHeap, the tree is shorter than log𝑛.
+* 7.11. Binary Search Trees
+* 7.12. Search Tree Operations
+  - Map() :: Create a new, empty map.
+  - put(key,val) :: Add a new key-value pair to the map. If the key is already
+                    in the map then replace the old value with the new value.
+  - get(key) :: Given a key, return the value stored in the map or None
+                otherwise.
+  - del :: Delete the key-value pair from the map using a statement of the form
+           del map[key].
+  - len() :: Return the number of key-value pairs stored in the map.
+  - in :: Return True for a statement of the form key in map, if the given key
+          is in the map.
+* 7.13. Search Tree Implementation
+  A binary search tree relies on the property that keys that are less than the
+  parent are found in the left subtree, and keys that are greater than the
+  parent are found in the right subtree. We will call this the *bst property*.
+
+  [[file:figure/Figure%201:%20A%20Simple%20Binary%20Search%20Tree.png][A Simple Binary Search Tree]]
+
+  - put
+    - Starting at the root of the tree, search the binary tree comparing the new
+      key to the key in the current node. If the new key is less than the
+      current node, search the left subtree. If the new key is greater than the
+      current node, search the right subtree.
+    - When there is no left (or right) child to search, we have found the
+      position in the tree where the new node should be installed.
+    - To add a node to the tree, create a new TreeNode object and insert the
+      object at the point discovered in the previous step.
+      
+    [[file:figure/Figure%202:%20Inserting%20a%20Node%20with%20Key%20=%2019.png][Inserting a Node with Key = 19]]
+
+  - get method simply searches the tree recursively until it gets to a
+    non-matching leaf node or finds a matching key. When a matching key is
+    found, the value stored in the payload of the node is returned.
+      
+  delete
+  - The node to be deleted has no children.
+    [[file:figure/Figure%203:%20Deleting%20Node%2016,%20a%20Node%20without%20Children.png][Deleting Node 16, a Node without Children]]
+  - The node to be deleted has only one child.
+    [[file:figure/Figure%204:%20Deleting%20Node%2025,%20a%20Node%20That%20Has%20a%20Single%20Child.png][Deleting Node 25, a Node That Has a Single Child]]
+    - has left child
+      - If the current node is a left child then we only need to update the
+        parent reference of the left child to point to the parent of the current
+        node, and then update the left child reference of the parent to point to
+        the current node’s left child.
+      - If the current node is a right child then we only need to update the
+        parent reference of the left child to point to the parent of the current
+        node, and then update the right child reference of the parent to point
+        to the current node’s left child.
+      - If the current node has no parent, it must be the root. In this case we
+        will just replace the key, payload, leftChild, and rightChild data by
+        calling the replaceNodeData method on the root.
+    - has right child ...
+  - The node to be deleted has two children.
+    [[file:figure/Figure%205:%20Deleting%20Node%205,%20a%20Node%20with%20Two%20Children.png][Deleting Node 5, a Node with Two Children]]
+
+    There are three cases to consider when looking for the successor in TreeNode
+    Class:
+    - If the node has a right child, then the successor is the smallest key in
+      the right subtree.
+    - If the node has no right child and is the left child of its parent, then
+      the parent is the successor.
+    - If the node is the right child of its parent, and itself has no right
+      child, then the successor to this node is the successor of its parent,
+      excluding this node.
+
+    
+  yield is similar to return in that it returns a value to the caller. However,
+  yield also takes the additional step of freezing the state of the function so
+  that the next time the function is called it continues executing from the
+  exact point it left off earlier. Functions that create objects that can be
+  iterated are called *generator functions*.
+
+  __iter__ overrides the *for x in* operation for iteration, so it really is
+  recursive! Because it is recursive over TreeNode instances the __iter__ method
+  is defined in the TreeNode class.
+
+  [[file:activeCode/binarySearchTree.py]]
+  [[file:code/binarySearchTree.py]]
+* 7.14. Search Tree Analysis
+  If the keys are added in a random order, the height of the tree is going to be
+  around log 𝑛 where 𝑛 is the number of nodes in the tree.
+
+  The number of nodes at any particular level is 2𝑑 where 𝑑 is the depth of the
+  level. The total number of nodes in a perfectly balanced binary tree is
+  2^(ℎ+1)−1, where ℎ represents the height of the tree.
+
+  A perfectly balanced tree has the same number of nodes in the left subtree as
+  the right subtree.
+
+  balanced binary tree, the worst-case performance of put is 𝑂(log 𝑛), where 𝑛
+  is the number of nodes in the tree
+
+  put method - worst case O(n).
+
+  [[file:figure/Figure%206:%20A%20skewed%20binary%20search%20tree%20would%20give%20poor%20performance.png][A skewed binary search tree would give poor performance]]
+* 7.15. Balanced Binary Search Trees
+  AVL tree that automatically makes sure that the tree remains balanced at all
+  times. AVL tree named for its inventors: G.M. Adelson-Velskii and E.M. Landis.
+
+  To implement our AVL tree we need to keep track of a *balance factor* for each
+  node in the tree.
+
+  𝑏𝑎𝑙𝑎𝑛𝑐𝑒𝐹𝑎𝑐𝑡𝑜𝑟=ℎ𝑒𝑖𝑔ℎ𝑡(𝑙𝑒𝑓𝑡𝑆𝑢𝑏𝑇𝑟𝑒𝑒)−ℎ𝑒𝑖𝑔ℎ𝑡(𝑟𝑖𝑔ℎ𝑡𝑆𝑢𝑏𝑇𝑟𝑒𝑒)
+
+  a subtree is left-heavy if the balance factor is greater than zero. If the
+  balance factor is less than zero then the subtree is right heavy. If the
+  balance factor is zero then the tree is perfectly in balance. we will define a
+  tree to be in balance if the balance factor is -1, 0, or 1. Once the balance
+  factor of a node in a tree is outside this range we will need to have a
+  procedure to bring the tree back into balance.
+
+  [[file:figure/Figure%201:%20An%20Unbalanced%20Right-Heavy%20Tree%20with%20Balance%20Factors.png][An Unbalanced Right-Heavy Tree with Balance Factors]]
+* 7.16. AVL Tree Performance
+  [[file:figure/Figure%202:%20Worst-Case%20Left-Heavy%20AVL%20Trees.png][Worst-Case Left-Heavy AVL Trees]]
+
+  height 0 there is 1 node
+  height 1 there is 1+1=2 nodes
+  height 2 there are 1+1+2=4
+  height 3 there are 1+2+4=7
+  \begin{equation}
+  \LARGE
+  N_h = 1 + N_{h - 1} + N_{h - 2}
+  \end{equation}
+
+  Fibonacci sequence:
+  \begin{equation}
+    \LARGE
+    \begin{split}
+      F_0 = 0 \\
+      F_1 = 1 \\
+      F_i = F_{i-1} + F_{i-2} \;\;\;\; \text{ for all } i \ge 2
+    \end{split}
+  \end{equation}
+
+  \begin{equation}
+    \LARGE
+    F_i / F_{i-1}
+  \end{equation}   
+  becomes closer and closer to approximating the golden ratio
+  \begin{equation}
+    \LARGE
+    \Phi = \frac{1 + \sqrt{5}}{2}
+  \end{equation}
+
+  simply use this equation to approximate
+  \begin{equation}
+  \LARGE
+  F_i =
+  \Phi^i/\sqrt{5}
+\end{equation}
+
+  \begin{equation}
+    \LARGE
+    N_h = F_{h+1} - 1, h \ge 1
+  \end{equation}
+
+  \begin{equation}
+    \LARGE
+    N_h = \frac{\Phi^{h+2}}{\sqrt{5}} - 1
+  \end{equation}
+
+  \begin{equation}
+    \LARGE
+    \begin{split}
+      \log{N_h+1} = (h+2)\log{\Phi} - \frac{1}{2} \log{5} \\
+      h = \frac{\log{N_h+1} - 2 \log{\Phi} + \frac{1}{2} \log{5}}{\log{\Phi}} \\
+      h = 1.44 \log{N_h}
+    \end{split}
+  \end{equation}
+
+  𝑂(log𝑁).
+* 7.17. AVL Tree Implementation
+  two base cases for updating balance factors:
+  - The recursive call has reached the root of the tree.
+  - The balance factor of the parent has been adjusted to zero. You should
+    convince yourself that once a subtree has a balance factor of zero, then the
+    balance of its ancestor nodes does not change.
+
+    
+  In order to bring an AVL Tree back into balance we will perform one or more
+  *rotations* on the tree.
+
+  To perform a left rotation we essentially do the following:
+  - Promote the right child (B) to be the root of the subtree.
+  - Move the old root (A) to be the left child of the new root.
+  - If new root (B) already had a left child then make it the right child of the
+    new left child (A).
+
+    [[file:figure/Figure%203:%20Transforming%20an%20Unbalanced%20Tree%20Using%20a%20Left%20Rotation.png][Transforming an Unbalanced Tree Using a Left Rotation]]
+    
+  To perform a right rotation we essentially do the following:
+  - Promote the left child (C) to be the root of the subtree.
+  - Move the old root (E) to be the right child of the new root.
+  - If the new root(C) already had a right child (D) then make it the left child
+    of the new right child (E).
+
+    [[file:figure/Figure%204:%20Transforming%20an%20Unbalanced%20Tree%20Using%20a%20Right%20Rotation.png][Transforming an Unbalanced Tree Using a Right Rotation]]
+
+    
+  [[file:figure/Figure%205:%20A%20Left%20Rotation.png][A Left Rotation]]
+
+  \begin{equation}
+    \LARGE
+    \begin{split}
+      newBal(B) = h_A - h_C \\
+      oldBal(B) = h_A - h_D \\
+      h_d = 1 + max(h_C,h_E) \\
+      oldBal(B) = h_A - (1 + max(h_C,h_E)) \\
+      newBal(B) - oldBal(B) = h_A - h_C - (h_A - (1 + max(h_C,h_E))) \\
+      newBal(B) - oldBal(B) = h_A - h_C - h_A + (1 + max(h_C,h_E)) \\
+      newBal(B) - oldBal(B) = h_A  - h_A + 1 + max(h_C,h_E) - h_C  \\
+      newBal(B) - oldBal(B) =  1 + max(h_C,h_E) - h_C \\
+      max(a,b)-c = max(a-c, b-c) \\
+      newBal(B) = oldBal(B) + 1 + max(h_C - h_C ,h_E - h_C) \\
+      h_E - h_C = -oldBal(D) \\
+      max(-a,-b) = -min(a,b) \\
+      newBal(B) = oldBal(B) + 1 + max(0 , -oldBal(D)) \\
+      newBal(B) = oldBal(B) + 1 - min(0 , oldBal(D)) \\
+    \end{split}
+  \end{equation}
+
+  
+
+  [[file:figure/Figure%206:%20An%20Unbalanced%20Tree%20that%20is%20More%20Difficult%20to%20Balance.png][An Unbalanced Tree that is More Difficult to Balance]]
+  [[file:figure/Figure%207:%20After%20a%20Left%20Rotation%20the%20Tree%20is%20Out%20of%20Balance%20in%20the%20Other%20Direction.png][After a Left Rotation the Tree is Out of Balance in the Other Direction]]
+  
+  To correct this problem we must use the following set of rules:
+  - If a subtree needs a left rotation to bring it into balance, first check the
+    balance factor of the right child. If the right child is left heavy then do
+    a right rotation on right child, followed by the original left rotation.
+    
+    [[file:figure/Figure%208:%20A%20Right%20Rotation%20Followed%20by%20a%20Left%20Rotation.png][A Right Rotation Followed by a Left Rotation]]
+
+  - If a subtree needs a right rotation to bring it into balance, first check
+    the balance factor of the left child. If the left child is right heavy then
+    do a left rotation on the left child, followed by the original right
+    rotation.
+
+    get put O(log_2(n))
+* 7.18. Summary of Map ADT Implementations
+  [[file:table/Table%201:%20Comparing%20the%20Performance%20of%20Different%20Map%20Implementations.png][Comparing the Performance of Different Map Implementations]]
+* 7.19. Summary
+* 7.20. Key Terms
+* 7.21. Discussion Questions
+* 7.22. Programming Exercises
