@@ -1,0 +1,312 @@
+* 8.1. Objectives
+* 8.2. Vocabulary and Definitions
+  - Vertex :: A vertex (also called a “node”) is a fundamental part of a graph.
+              It can have a name, which we will call the “key.” A vertex may
+              also have additional information. We will call this additional
+              information the “payload.”
+  - Edge :: An edge (also called an “arc”) is another fundamental part of a
+            graph. An edge connects two vertices to show that there is a
+            relationship between them. Edges may be one-way or two-way. If the
+            edges in a graph are all one-way, we say that the graph is a
+            *directed graph*, or a *digraph*.
+  - Weight :: Edges may be weighted to show that there is a cost to go from one
+              vertex to another.
+
+              
+  A graph can be represented by 𝐺 where 𝐺=(𝑉,𝐸). For the graph 𝐺, 𝑉 is a set of
+  vertices and 𝐸 is a set of edges. Each edge is a tuple (𝑣,𝑤) where 𝑤,𝑣∈𝑉. We
+  can add a third component to the edge tuple to represent a weight. A subgraph
+  𝑠 is a set of edges 𝑒 and vertices 𝑣 such that 𝑒⊂𝐸 and 𝑣⊂𝑉.
+
+  - Path :: A path in a graph is a sequence of vertices that are connected by
+            edges. Formally we would define a path as 𝑤1,𝑤2,...,𝑤𝑛 such that
+            (𝑤𝑖,𝑤𝑖+1)∈𝐸 for all 1≤𝑖≤𝑛−1. The unweighted path length is the
+            number of edges in the path, specifically 𝑛−1. The weighted path
+            length is the sum of the weights of all the edges in the path.
+  - Cycle :: A cycle in a directed graph is a path that starts and ends at the
+             same vertex. A graph with no cycles is called an *acyclic graph*. A
+             directed graph with no cycles is called a *directed acyclic graph*
+             or a *DAG*. We will see that we can solve several important
+             problems if the problem can be represented as a DAG.
+* 8.3. The Graph Abstract Data Type
+  - Graph() :: creates a new, empty graph.
+  - addVertex(vert) :: adds an instance of Vertex to the graph.
+  - addEdge(fromVert, toVert) :: Adds a new, directed edge to the graph that
+       connects two vertices.
+  - addEdge(fromVert, toVert, weight) :: Adds a new, weighted, directed edge to
+       the graph that connects two vertices.
+  - getVertex(vertKey) :: finds the vertex in the graph named vertKey.
+  - getVertices() :: returns the list of all vertices in the graph.
+  - in :: returns True for a statement of the form vertex in graph, if the given
+          vertex is in the graph, False otherwise.
+
+          
+  There are two well-known implementations of a graph, the *adjacency matrix*
+  and the *adjacency list*.
+* 8.4. An Adjacency Matrix
+  One of the easiest ways to implement a graph is to use a two-dimensional
+  matrix. In this matrix implementation, each of the rows and columns represent
+  a vertex in the graph. The value that is stored in the cell at the
+  intersection of row 𝑣 and column 𝑤 indicates if there is an edge from vertex 𝑣
+  to vertex 𝑤. When two vertices are connected by an edge, we say that they are
+  *adjacent*.
+
+  [[file:figure/Figure%203:%20An%20Adjacency%20Matrix%20Representation%20for%20a%20Graph.png][An Adjacency Matrix Representation for a Graph]]
+
+  The *advantage* of the adjacency matrix is that it is simple, and for small
+  graphs it is easy to see which nodes are connected to other nodes. However,
+  notice that most of the cells in the matrix are empty. Because most of the
+  cells are empty we say that this matrix is *sparse*. A matrix is not a very
+  efficient way to store sparse data.
+
+  The adjacency matrix is a good implementation for a graph when the number of
+  edges is large.
+* 8.5. An Adjacency List
+  space-efficient way to implement a sparsely connected graph is to use an
+  adjacency list. In an adjacency list implementation we keep a master list of
+  all the vertices in the Graph object and then each vertex object in the graph
+  maintains a list of the other vertices that it is connected to.
+
+  [[file:figure/Figure%204:%20An%20Adjacency%20List%20Representation%20of%20a%20Graph.png][An Adjacency List Representation of a Graph]]
+
+  The advantage of the adjacency list implementation is that it allows us to
+  compactly represent a sparse graph. The adjacency list also allows us to
+  easily find all the links that are directly connected to a particular vertex.
+* 8.6. Implementation
+  [[file:listing/graph.py]]
+* 8.7. The Word Ladder Problem
+  In a word ladder puzzle you must make the change occur gradually by changing
+  one letter at a time. At each step you must transform one word into another
+  word, you are not allowed to transform a word into a non-word.
+
+  FOOL
+  POOL
+  POLL
+  POLE
+  PALE
+  SALE
+  SAGE
+* 8.8. Building the Word Ladder Graph
+  [[file:figure/Figure%201:%20A%20Small%20Word%20Ladder%20Graph.png][A Small Word Ladder Graph]]
+
+  [[file:figure/Figure%202:%20Word%20Buckets%20for%20Words%20That%20are%20Different%20by%20One%20Letter.png][Word Buckets for Words That are Different by One Letter]]
+
+  [[file:listing/buildGraph.py]]
+  [[file:code/buildGraph.py]]
+* 8.9. Implementing Breadth First Search(BFS)
+  Given a graph 𝐺 and a starting vertex 𝑠, a breadth first search proceeds by
+  exploring edges in the graph to find all the vertices in 𝐺 for which there is
+  a path from 𝑠. The remarkable thing about a breadth first search is that it
+  finds all the vertices that are a distance 𝑘 from 𝑠 before it finds any
+  vertices that are a distance 𝑘+1. One good way to visualize what the breadth
+  first search algorithm does is to imagine that it is building a tree, one
+  level of the tree at a time. A breadth first search adds all children of the
+  starting vertex before it begins to discover any of the grandchildren.
+
+  To keep track of its progress, BFS colors each of the vertices white, gray, or
+  black. All the vertices are initialized to white when they are constructed. A
+  white vertex is an undiscovered vertex. When a vertex is initially discovered
+  it is colored gray, and when BFS has completely explored a vertex it is
+  colored black. This means that once a vertex is colored black, it has no white
+  vertices adjacent to it. A gray node, on the other hand, may have some white
+  vertices adjacent to it, indicating that there are still additional vertices
+  to explore.
+
+  white, the vertex is unexplored, and four things happen:
+  1. The new, unexplored vertex nbr, is colored gray.
+  2. The predecessor of nbr is set to the current node currentVert
+  3. The distance to nbr is set to the distance to currentVert + 1
+  4. nbr is added to the end of a queue. Adding nbr to the end of the queue
+     effectively schedules this node for further exploration, but not until all
+     the other vertices on the adjacency list of currentVert have been explored.
+
+     
+  [[file:listing/bfs.py]]
+  [[file:code/bfs.py]]
+* 8.10. Breadth First Search Analysis
+  𝑂(𝑉+𝐸).
+* 8.11. The Knight’s Tour Problem
+  knight’s tour puzzle is played on a chess board with a single chess piece, the
+  knight. The object of the puzzle is to find a sequence of moves that allow the
+  knight to visit every square on the board exactly once. One such sequence is
+  called a “tour.”
+* 8.12. Building the Knight’s Tour Graph
+  [[file:figure/Figure%201:%20Legal%20Moves%20for%20a%20Knight%20on%20Square%2012,%20and%20the%20Corresponding%20Graph.png][Legal Moves for a Knight on Square 12, and the Corresponding Graph]]
+
+  [[file:listing/knightGraph.py]]
+  [[file:code/knightGraph.py]]
+
+  [[file:figure/Figure%202:%20All%20Legal%20Moves%20for%20a%20Knight%20on%20an%208%C3%978%20Chessboard.png][All Legal Moves for a Knight on an 8×8 Chessboard]]
+* 8.13. Implementing Knight’s Tour
+  depth first search (DFS) creates a search tree by exploring one branch of the
+  tree as deeply as possible.
+
+  depth first search:
+  1. forbidding a node to be visited more than once.
+  2. allows nodes to be visited more than once as the tree is constructed.
+
+     
+  The knightTour function takes four parameters: n, the current depth in the
+  search tree; path, a list of vertices visited up to this point; u, the vertex
+  in the graph we wish to explore; and limit the number of nodes in the path.
+
+  [[file:listing/knightGraph.py]]
+  [[file:code/knightGraph.py]]
+* 8.14. Knight’s Tour Analysis
+  The reason for this is that the knight’s tour problem as we have implemented
+  it so far is an exponential algorithm of size 𝑂(𝑘^𝑁), where N is the number of
+  squares on the chess board, and k is a small constant.
+
+  [[file:figure/Figure%2012:%20A%20Search%20Tree%20for%20the%20Knight%E2%80%99s%20Tour.png][A Search Tree for the Knight’s Tour]]
+
+  [[file:figure/Figure%2013:%20Number%20of%20Possible%20Moves%20for%20Each%20Square.png][Number of Possible Moves for Each Square]]
+
+  We have already seen that the number of nodes in a binary tree of height N is
+  2^(𝑁+1) − 1.
+
+  so : 𝑘^(𝑁+1) − 1
+
+  orderbyAvail will be used in place of the call to u.getConnections in the code
+  previously shown above.
+
+  The problem with using the vertex with the most available moves as your next
+  vertex on the path is that it tends to have the knight visit the middle
+  squares early on in the tour. When this happens it is easy for the knight to
+  get stranded on one side of the board where it cannot reach unvisited squares
+  on the other side of the board. On the other hand, visiting the squares with
+  the fewest available moves first pushes the knight to visit the squares around
+  the edges of the board first. This ensures that the knight will visit the
+  hard-to-reach corners early and can use the middle squares to hop across the
+  board only when necessary. Utilizing this kind of knowledge to speed up an
+  algorithm is called a heuristic. Humans use heuristics every day to help make
+  decisions, heuristic searches are often used in the field of artificial
+  intelligence. This particular heuristic is called Warnsdorff’s algorithm,
+  named after H. C. Warnsdorff who published his idea in 1823.
+* 8.15. General Depth First Search
+  When the depth first search algorithm creates a group of trees we call this a
+  depth first forest.
+
+  The discovery time tracks the number of steps in the algorithm before a vertex
+  is first encountered. The finish time is the number of steps in the algorithm
+  before a vertex is colored black.
+
+  [[file:listing/DFSGraph.py]]
+  [[file:code/DFSGraph.py]]
+
+  The starting and finishing times for each node display a property called the
+  parenthesis property. This property means that all the children of a
+  particular node in the depth first tree have a later discovery time and an
+  earlier finish time than their parent.
+* 8.16. Depth First Search Analysis
+  - dfs :: O(V)
+  - dfsvisit :: O(E)
+  so O(V + E)
+* 8.17. Topological Sorting
+  topological sort takes a directed acyclic graph and produces a linear ordering
+  of all its vertices such that if the graph 𝐺 contains an edge (𝑣,𝑤) then the
+  vertex 𝑣 comes before the vertex 𝑤 in the ordering.
+
+  The algorithm for the topological sort is as follows:
+  - Call dfs(g) for some graph g. The main reason we want to call depth first
+    search is to compute the finish times for each of the vertices.
+  - Store the vertices in a list in decreasing order of finish time.
+  - Return the ordered list as the result of the topological sort.
+
+
+  [[file:figure/Figure%2028:%20Result%20of%20Depth%20First%20Search%20on%20the%20Pancake%20Graph.png][Result of Depth First Search on the Pancake Graph]]
+
+  [[file:figure/Figure%2029:%20Result%20of%20Topological%20Sort%20on%20Directed%20Acyclic%20Graph.png][Result of Topological Sort on Directed Acyclic Graph]]
+* 8.18. Strongly Connected Components
+  One graph algorithm that can help find clusters of highly interconnected
+  vertices in a graph is called the *strongly connected components algorithm
+  (SCC)*. We formally define a strongly connected component, 𝐶, of a graph 𝐺, as
+  the largest subset of vertices 𝐶⊂𝑉 such that for every pair of vertices 𝑣,𝑤∈𝐶
+  we have a path from 𝑣 to 𝑤 and a path from 𝑤 to 𝑣.
+
+  [[file:figure/Figure%2031:%20A%20Directed%20Graph%20with%20Three%20Strongly%20Connected%20Components.png][A Directed Graph with Three Strongly Connected Components]]
+
+  [[file:figure/Figure%2032:%20The%20Reduced%20Graph.png][The Reduced Graph]]
+
+  The *transposition* of a graph 𝐺 is defined as the graph 𝐺^𝑇 where all the
+  edges in the graph have been reversed. That is, if there is a directed edge
+  from node A to node B in the original graph then 𝐺^𝑇 will contain and edge
+  from node B to node A.
+  
+  [[file:figure/Figure%2033:%20A%20Graph%20%F0%9D%90%BA.png][A Graph 𝐺]] [[file:figure/Figure%2034:%20Its%20Transpose%20%20%F0%9D%90%BA^%F0%9D%91%87.png][Its Transpose 𝐺^𝑇]]
+
+  describe the algorithm to compute the strongly connected components for a
+  graph.
+  - Call dfs for the graph 𝐺 to compute the finish times for each vertex.
+  - Compute 𝐺^𝑇.
+  - Call dfs for the graph 𝐺^𝑇 but in the main loop of DFS explore each vertex
+    in decreasing order of finish time.
+  - Each tree in the forest computed in step 3 is a strongly connected
+    component. Output the vertex ids for each vertex in each tree in the forest
+    to identify the component.
+
+
+  [[file:figure/Figure%2035:%20Finishing%20times%20for%20the%20original%20graph%20%20%F0%9D%90%BA.png][Finishing times for the original graph  𝐺]]
+
+  [[file:figure/Figure%2036:%20Finishing%20times%20for%20%20%F0%9D%90%BA%F0%9D%91%87.png][Finishing times for 𝐺𝑇]]
+
+  [[file:figure/Figure%2037:%20Strongly%20Connected%20Components.png][Strongly Connected Components]]
+* 8.19. Shortest Path Problems
+  [[file:figure/Figure%201:%20Overview%20of%20Connectivity%20in%20the%20Internet.png][Overview of Connectivity in the Internet]]
+
+  [[file:figure/Figure%202:%20Connections%20and%20Weights%20between%20Routers%20in%20the%20Internet.png][Connections and Weights between Routers in the Internet]]
+* 8.20. Dijkstra’s Algorithm
+  The algorithm we are going to use to determine the shortest path is called
+  “Dijkstra’s algorithm.” Dijkstra’s algorithm is an iterative algorithm that
+  provides us with the shortest path from one particular starting node to all
+  other nodes in the graph.
+
+  When a vertex is first created dist is set to a very large number.
+  Theoretically you would set dist to infinity, but in practice we just set it
+  to a number that is larger than any real distance we would have in the problem
+  we are trying to solve.
+
+  [[file:listing/dijkstra.py]]
+
+  It is important to note that Dijkstra’s algorithm works only when the weights
+  are all positive. You should convince yourself that if you introduced a
+  negative weight on one of the edges to the graph that the algorithm would
+  never exit.
+* 8.21. Analysis of Dijkstra’s Algorithm
+  Finally, let us look at the running time of Dijkstra’s algorithm. We first note
+  that building the priority queue takes 𝑂(𝑉) time since we initially add every
+  vertex in the graph to the priority queue. Once the queue is constructed the
+  while loop is executed once for every vertex since vertices are all added at the
+  beginning and only removed after that. Within that loop each call to delMin,
+  takes 𝑂(log𝑉) time. Taken together that part of the loop and the calls to delMin
+  take 𝑂(𝑉log(𝑉)). The for loop is executed once for each edge in the graph, and
+  within the for loop the call to decreaseKey takes time 𝑂(𝐸log(𝑉)). So the
+  combined running time is 𝑂((𝑉+𝐸)log(𝑉)).
+* 8.22. Prim’s Spanning Tree Algorithm
+  [[file:figure/Figure%209:%20The%20Broadcast%20Problem.png][The Broadcast Problem]]
+
+  A brute force solution is for the broadcast host to send a single copy of the
+  broadcast message and let the routers sort things out. In this case, the
+  easiest solution is a strategy called uncontrolled flooding.
+
+  The solution to this problem lies in the construction of a minimum weight
+  spanning tree. Formally we define the minimum spanning tree 𝑇 for a graph
+  𝐺=(𝑉,𝐸) as follows. 𝑇 is an acyclic subset of 𝐸 that connects all the vertices
+  in 𝑉. The sum of the weights of the edges in T is minimized.
+
+  [[file:figure/Figure%2010:%20Minimum%20Spanning%20Tree%20for%20the%20Broadcast%20Graph.png][Minimum Spanning Tree for the Broadcast Graph]]
+
+  The algorithm we will use to solve this problem is called Prim’s algorithm.
+  Prim’s algorithm belongs to a family of algorithms called the “greedy
+  algorithms” because at each step we will choose the cheapest next step.
+
+  [[file:listing/prim.py]]
+* 8.23. Summary
+  - Breadth first search for finding the unweighted shortest path.
+  - Dijkstra’s algorithm for weighted shortest path.
+  - Depth first search for graph exploration.
+  - Strongly connected components for simplifying a graph.
+  - Topological sort for ordering tasks.
+  - Minimum weight spanning trees for broadcasting messages.
+* 8.24. Key Terms
+* 8.25. Discussion Questions
+* 8.26. Programming Exercises
