@@ -122,7 +122,7 @@ class NorGate(BinaryGate):
         a = self.getPinA()
         b = self.getPinB()
 
-        if a == 1or b == 1 :
+        if a == 1 or b == 1 :
             return 0
         else :
             return 1

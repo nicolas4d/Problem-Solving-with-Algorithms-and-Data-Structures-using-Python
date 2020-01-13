@@ -11,7 +11,13 @@ def gcd(m, n):
 
 class Fraction:
     def __init__(self, top, bottom):
-        common = gcd(int(top), int(bottom))
+        topInt = int(top)
+        bottomInt = int(bottom)
+
+        if bottomInt < 0 :
+            topInt = - topInt
+
+        common = gcd(topInt, bottomInt)
         self.num = top // common
         self.den = bottom // common
 
@@ -21,11 +27,17 @@ class Fraction:
     def __str__(self):
         return str(self.num) + "/" + str(self.den)
 
+    def __repr__(self):
+        return self.__str__()
+
     def __add__(self, otherfraction):
         newnum = self.num * otherfraction.den + self.den * otherfraction.num
         newden = self.den * otherfraction.den
-        common = gcd(newnum, newden)
-        return Fraction(newnum // common, newden // common)
+
+        return Fraction(newnum, newden)
+
+    def __radd__(self, other):
+        return self.add(other)
 
     def __eq__(self, other):
         firstnum = self.num * other.den

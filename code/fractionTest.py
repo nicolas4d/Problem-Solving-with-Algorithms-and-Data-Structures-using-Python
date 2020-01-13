@@ -10,6 +10,9 @@ class TestFraction(unittest.TestCase):
         self.assertEqual(fraction.num, 3)
         self.assertEqual(fraction.den, 5)
 
+        frac = Fraction(3, -5)
+        self.assertEqual(frac.getNum(), -3)
+
     def test_show(self):
         frac = Fraction(3, 5)
         print("show:")
@@ -21,10 +24,20 @@ class TestFraction(unittest.TestCase):
         print("str:", frac)
         print()
 
+    def test_repr(self):
+        frac = Fraction(3, 5)
+        print("repr:", frac.__repr__())
+
     def test_add(self):
         frac = Fraction(3, 5)
         otherFrac = Fraction(3, 5)
         newFrac = frac + otherFrac
+        self.assertEqual(str(newFrac), "6/5")
+
+    def test_radd(self):
+        frac = Fraction(3, 5)
+        otherFrac = Fraction(3, 5)
+        newFrac = otherFrac + frac
         self.assertEqual(str(newFrac), "6/5")
 
     def test_eq(self):

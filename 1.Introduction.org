@@ -55,7 +55,7 @@
    we define a *class* to be a description of what the data look like (the
    state) and what the data can do (the behavior). Classes are analogous to
    abstract data types because a user of a class only sees the state and
-   behavior of a data item. Data items are called *objects* in the
+   behavior of a data item. *Data items* are called *objects* in the
    object-oriented paradigm. An object is an instance of a class.
 ** 1.8.1. Built-in Atomic Data Types
    Python has two main built-in numeric classes that implement the integer and
@@ -81,7 +81,7 @@
 
    A major difference between lists and strings is that lists can be modified
    while strings cannot. This is referred to as *mutability*. Lists are mutable;
-   strings are immutable.
+   strings are *immutable*.
 
    Tuples are very similar to lists in that they are heterogeneous sequences of
    data. The difference is that a tuple is immutable, like a string. A tuple
@@ -104,19 +104,8 @@
 ** ^
    input
 ** 1.9.1. String Formatting
-   #+begin_src python
-   >>> print("Hello","World", sep="***")
-   Hello***World
-
-   >>> print("Hello","World", end="***")
-   Hello World***>>>
-
-   print("%s is %d years old." % (aName, age))
-
-   >>> print("The %(item)s costs %(cost)7.1f cents"%itemdict)
-   The banana costs    24.0 cents
-   #+end_src
-
+   [[file:code/stringFormatting.py]]
+   
    The % operator is a string operator called the *format operator*
 * 1.10. Control Structures
   algorithms require two important control structures: iteration and selection.
@@ -133,66 +122,16 @@
 
   first, known as a syntax error, simply means that the programmer has made a
   mistake in the structure of a statement or expression.
-  #+begin_src python
-  >>> for i in range(10)
-  SyntaxError: invalid syntax (<pyshell#61>, line 1)
-  #+end_src
 
   The other type of error, known as a logic error, denotes a situation where the
-  program executes but gives the wrong result. These types of runtime errors are
-  typically called *exceptions*.
+  program executes but gives the wrong result. These types of *runtime errors*
+  are typically called *exceptions*.
 
-  When an exception occurs, we say that it has been “raised.” You can “handle”
+  When an exception occurs, we say that it has been *raised*. You can “handle”
   the exception that has been raised by using a *try* statement.
-  #+begin_src python
-    >>> anumber = int(input("Please enter an integer "))
-    Please enter an integer -23
-    >>> print(math.sqrt(anumber))
-    Traceback (most recent call last):
-    File "<pyshell#102>", line 1, in <module>
-    print(math.sqrt(anumber))
-    ValueError: math domain error
-    >>>
-
-
-    >>> 
-    try:
-       print(math.sqrt(anumber))
-    except:
-       print("Bad Value for square root")
-       print("Using absolute value instead")
-       print(math.sqrt(abs(anumber)))
-
-
-    >>> if anumber < 0:
-    ...    raise RuntimeError("You can't use a negative number")
-    ... else:
-    ...    print(math.sqrt(anumber))
-    ...
-    Traceback (most recent call last):
-    File "<stdin>", line 2, in <module>
-    RuntimeError: You can't use a negative number
-    >>>  
-  #+end_src
+  [[file:code/exceptionHandling.py]]
 * 1.12. Defining Functions
-  #+begin_src python
->>> def square(n):
-...    return n**2
-...
->>> square(3)
-9
->>> square(square(3))
-81
->>>
-
-
-def squareroot(n):
-    root = n/2    #initial guess will be 1/2 of n
-    for k in range(20):
-        root = (1/2)*(root + (n / root))
-
-    return root
-  #+end_src
+  [[file:code/definingFunctions.py]]
 * 1.13. Object-Oriented Programming in Python: Defining Classes
 ** ^
    One of the most powerful features in an object-oriented programming language
@@ -208,6 +147,7 @@ def squareroot(n):
    class.
 ** 1.13.1. A Fraction Class
    [[file:listing/fraction.py]]
+   [[file:code/fraction.py]]
 
    [[file:figure/Figure%205:%20An%20Instance%20of%20the%20Fraction%20Class.png][An Instance of the Fraction Class]]
 
@@ -225,13 +165,12 @@ def squareroot(n):
 
    [[file:figure/Figure%208:%20An%20Inheritance%20Hierarchy%20for%20Python%20Collections.png][An Inheritance Hierarchy for Python Collections]]
 
-   IS-A Relationship (the list IS-A sequential collection).
-
    [[file:figure/Figure%209:%20Three%20Types%20of%20Logic%20Gates.png][Three Types of Logic Gates]]
 
    [[file:figure/Figure%2011:%20An%20Inheritance%20Hierarchy%20for%20Logic%20Gates.png][An Inheritance Hierarchy for Logic Gates]]
 
    [[file:listing/logicGate.py]]
+   [[file:code/logicGate.py]]
 
    Python also has a function called super which can be used in place of
    explicitly naming the parent class.
@@ -261,51 +200,33 @@ def squareroot(n):
     before continuing on with its own data and behavior.
 * 1.15. Key Terms
 * 1.16. Discussion Questions
+** 1
+   学校 院 系 老师 学生
+   行政老师
+** 2
+   bank account
+   account for saving
+   account for credit
+** 3
+   computer brands : thinkpad ...
+
+   computer os :
+   linux : ubuntu centos ...
+   unix : mac ...
+   window : win10 win7 ...
+** 4
+   ...
 * 1.17. Programming Exercises
-  1. Implement the simple methods getNum and getDen that will return the
-     numerator and denominator of a fraction.
-
-     [[file:code/fraction.py]]
-
-  2. In many ways it would be better if all fractions were maintained in lowest
-     terms right from the start. Modify the constructor for the Fraction class so
-     that GCD is used to reduce fractions immediately. Notice that this means the
-     __add__ function no longer needs to reduce. Make the necessary modifications.
-
-  3. Implement the remaining simple arithmetic operators (__sub__, __mul__,
-     and __truediv__).
-
-  4. Implement the remaining relational operators (__gt__, __ge__, __lt__,
-     __le__, and __ne__)
-
-  5. Modify the constructor for the fraction class so that it checks to make
-     sure that the numerator and denominator are both integers. If either is not
-     an integer the constructor should raise an exception.
-
-  6. In the definition of fractions we assumed that negative fractions have a
-     negative numerator and a positive denominator. Using a negative denominator
-     would cause some of the relational operators to give incorrect results. In
-     general, this is an unnecessary constraint. Modify the constructor to allow
-     the user to pass a negative denominator so that all of the operators
-     continue to work properly.
-
-     Research the __radd__ method. How does it differ from __add__? When is it used? Implement __radd__.
-
-     Repeat the last question but this time consider the __iadd__ method.
-
-     Research the __repr__ method. How does it differ from __str__? When is it used? Implement __repr__.
-
-     Research other types of gates that exist (such as NAND, NOR, and XOR). Add them to the circuit hierarchy. How much additional coding did you need to do?
-
-     The most simple arithmetic circuit is known as the half-adder. Research the simple half-adder circuit. Implement this circuit.
-
-     Now extend that circuit and implement an 8 bit full-adder.
-
-     The circuit simulation shown in this chapter works in a backward direction. In other words, given a circuit, the output is produced by working back through the input values, which in turn cause other outputs to be queried. This continues until external input lines are found, at which point the user is asked for values. Modify the implementation so that the action is in the forward direction; upon receiving inputs the circuit produces an output.
-
-     Design a class to represent a playing card. Now design a class to represent a deck of cards. Using these two classes, implement a favorite card game.
-
-     Find a Sudoku puzzle in the local newspaper. Write a program to solve the puzzle.
+** 1, 2, 3, 4, 5, 6, 7
+   [[file:code/fraction.py]]
+** 8
+   对于+号操作，可变对象和不可变对象调用的都是add操作
+   对于+=号操作，可变对象调用add，不可变对象调用的是iadd(不可变对象没有iadd) iadd是原地修改
+** 9
+   函数str() 用于将值转化为适于人阅读的形式，而repr() 转化为供解释器读取的形式
+   （如果没有等价的语法，则会发生SyntaxError 异常）， 适合开发和调试阶段使用。
+** 10
+   [[file:code/logicGate.py]]
 * code
   [[file:code/fraction.py]]
   [[file:code/logicGate.py]]
