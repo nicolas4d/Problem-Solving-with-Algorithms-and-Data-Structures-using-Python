@@ -8,9 +8,8 @@
   - To understand how to benchmark simple Python programs.
 * 3.2. What Is Algorithm Analysis?
   [[file:activeCode/sumOfN.py]]
+  [[file:code/sumOfN.py]]
 
-  [[file:activeCode/foo.py]]
-  
   readable, understandable code.
 
   Algorithm analysis is concerned with comparing algorithms based upon the
@@ -24,8 +23,10 @@
   “running time” of the algorithm.
 
   [[file:listing/sumOf2.py]]
+  [[file:code/sumOf2.py]]
 
   [[file:activeCode/sumOf3.py]]
+  [[file:code/sumOf3.py]]
 * 3.3. Big-O Notation
   When trying to characterize an algorithm’s efficiency in terms of execution
   time, independent of any particular program or computer, it is important to
@@ -53,22 +54,16 @@
   we need to characterize their performance in terms of best case, worst case,
   or average case performance.
 
-  Table 1: Common Functions for Big-O
-  | f(n)  | Name        |
-  | 1     | Constant    |
-  | log𝑛  | Logarithmic |
-  | 𝑛     | Linear      |
-  | 𝑛log𝑛 | Log Linear  |
-  | 𝑛^2   | Quadratic   |
-  | 𝑛^3   | Cubic       |
-  | 2^𝑛   | Exponential |
+  [[file:table/Table%201:%20Common%20Functions%20for%20Big-O.png][Common Functions for Big-O]]
 
   [[file:figure/Figure%201:%20Plot%20of%20Common%20Big-O%20Functions.png][Plot of Common Big-O Functions]]
 
-  [[file:listing/2.py]]
-
-  𝑇(𝑛)=3+3𝑛2+2𝑛+1=3𝑛2+2𝑛+4    𝑂(𝑛2)
+  [[file:listing/2.py]] 𝑇(𝑛)=3+3𝑛^2+2𝑛+1=3𝑛^2+2𝑛+4 𝑂(𝑛2)
 * 3.4. An Anagram Detection Example
+** ^
+   One string is an anagram of another if the second is simply a rearrangement
+   of the first. For example, 'heart' and 'earth' are anagrams. The strings
+   'python' and 'typhon' are anagrams as well.
 ** 3.4.1. Solution 1: Checking Off
    [[file:activeCode/anagramSolution1.py]]
 
@@ -88,9 +83,10 @@
 
    𝑛∗(𝑛−1)∗(𝑛−2)∗...∗3∗2∗1 , which is 𝑛!
 
-   It turns out that 𝑛! grows even faster than 2𝑛 as n gets large.
+   It turns out that 𝑛! grows even faster than 2^𝑛 as n gets large.
 ** 3.4.4. Solution 4: Count and Compare
    [[file:activeCode/anagramSolution4.py]]
+   [[file:code/anagramSolution4.py]]
 
    𝑇(𝑛)=2𝑛+26 steps. That is 𝑂(𝑛).
 
@@ -105,9 +101,11 @@
 
 
   [[file:listing/lists.py]]
+  [[file:code/lists.py]]
 
-  Table 2: Big-O Efficiency of Python List Operators
+  Table 2: Big-O Efficiency of Python List Operators :
   Operation    Big-O Efficiency
+
   index []    O(1)
   index assignment    O(1)
   append    O(1)
@@ -135,6 +133,7 @@
   iteration O(n)
 
   [[file:listing/dictionaries.py]]
+  [[file:code/dictionaries.py]]
 
   https://wiki.python.org/moin/TimeComplexity
 * 3.8. Summary
@@ -145,4 +144,14 @@
     with respect to the size of the problem.
 * 3.9. Key Terms
 * 3.10. Discussion Questions
+** 1
+   O(n^2)
+** 2
+   O(n)
+** 3
+   O(log n)
+** 4
+   O(n^3)
+** 5
+   O(n)
 * 3.11. Programming Exercises
