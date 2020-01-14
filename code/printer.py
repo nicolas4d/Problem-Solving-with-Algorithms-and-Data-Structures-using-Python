@@ -69,6 +69,5 @@ def simulation(numSeconds, pagesPerMinute):
     print("Average Wait %6.2f secs %3d tasks remaining."%(averageWait,printQueue.size()))
 
 
-    
 for i in range(10):
     simulation(3600, 5)

@@ -27,7 +27,7 @@ def infixToPostfix(infixexpr):
             while (not opStack.isEmpty()) and \
                   (prec[opStack.peek()] >= prec[token]):
                 postfixList.append(opStack.pop())
-                
+
             opStack.push(token)
 
     while not opStack.isEmpty():

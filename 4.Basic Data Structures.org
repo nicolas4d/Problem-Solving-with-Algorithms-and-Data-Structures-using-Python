@@ -35,13 +35,14 @@
               and returns an integer.
 * 4.5. Implementing a Stack in Python
   [[file:activeCode/stack.py]]
+  [[file:code/stack.py]]
 
   The pythonds module contains implementations of all data structures discussed
   in this book. It is structured according to the sections: basic, trees, and
   graphs. The module can be downloaded from GitHub. or installed from the
   command line using pip install pythonds.
 
-  [[file:activeCode/stack-2.py]]
+  [[file:code-pythonds/stack.py]]
 * 4.6. Simple Balanced Parentheses
   *Balanced parentheses* means that each opening symbol has a corresponding
   closing symbol and the pairs of parentheses are properly nested.
@@ -49,15 +50,17 @@
   [[file:figure/Figure%204:%20Matching%20Parentheses.png][Matching Parentheses]]
 
   [[file:activeCode/parChecker.py]]
-  
+  [[file:code/parChecker.py]]
 * 4.7. Balanced Symbols (A General Case)
   [[file:activeCode/parChecker.py]]
+  [[file:code/parChecker.py]]
 * 4.8. Converting Decimal Numbers to Binary Numbers
   [[file:figure/Figure%205:%20Decimal-to-Binary%20Conversion.png][Decimal-to-Binary Conversion]]
 
   [[file:activeCode/divideBy2.py]]
-
+  
   [[file:activeCode/baseConverter.py]]
+  [[file:code/baseConverter.py]]
 * 4.9. Infix, Prefix and Postfix Expressions
 ** ^
    *infix* since the operator is in between the two operands that work on.
@@ -103,6 +106,7 @@
 
       
    [[file:activeCode/infixToPostfix.py]]
+   [[file:code/infixToPostfix.py]]
 ** 4.9.3. Postfix Evaluation
    [[file:figure/Figure%2010:%20Stack%20Contents%20During%20Evaluation.png][Stack Contents During Evaluation]]
 
@@ -125,6 +129,7 @@
 
 
    [[file:activeCode/postfixEval.py]]
+   [[file:code/postfixEval.py]]
 * 4.10. What Is a Queue?
   A queue is an ordered collection of items where the addition of new items
   happens at one end, called the “rear,” and the removal of existing items
@@ -152,20 +157,22 @@
   - size() :: returns the number of items in the queue. It needs no parameters
               and returns an integer.
 * 4.12. Implementing a Queue in Python
-  Recall that this also means that enqueue will be O(n) and dequeue will be O(1).
+  enqueue will be O(n) and dequeue will be O(1).
 
   [[file:listing/Queue.py]]
-  
+  [[file:code/Queue.py]]
 * 4.13. Simulation: Hot Potato
   [[file:figure/Figure%202:%20A%20Six%20Person%20Game%20of%20Hot%20Potato.png][A Six Person Game of Hot Potato]]
 
   [[file:activeCode/hotPotato.py]]
+  [[file:code/hotPotato.py]]
 * 4.14. Simulation: Printing Tasks
 ** ^
    [[file:figure/Figure%204:%20Computer%20Science%20Laboratory%20Printing%20Queue.png][Computer Science Laboratory Printing Queue]]
 ** 4.14.1. Main Simulation Steps
 ** 4.14.2. Python Implementation
    [[file:listing/printer.py]]
+   [[file:code/printer.py]]
 ** 4.14.3. Discussion
 * 4.15. What Is a Deque?
   deque, also known as a double-ended queue, is an ordered collection of items
@@ -192,6 +199,7 @@
               and returns an integer.
 * 4.17. Implementing a Deque in Python
   [[file:listing/dequee.py]]
+  [[file:code/dequee.py]]
 
   adding and removing items from the *front* is O(1) whereas adding and
   removing from the *rear* is O(n).
@@ -202,7 +210,8 @@
   [[file:figure/Figure%202:%20A%20Deque.png][A Deque]]
 
   [[file:activeCode/palchecker.py]]
-* TODO 4.19. Lists
+  [[file:code/palchecker.py]]
+* 4.19. Lists
   A list is a collection of items where each item holds a relative position with
   respect to the others.
 * 4.20. The Unordered List Abstract Data Type
@@ -243,6 +252,7 @@
    [[file:listing/node.py]]
 ** 4.21.2. The Unordered List Class
    [[file:listing/UnorderedList.py]]
+   [[file:code/UnorderedList.py]]
 
    It is very important to note that the list class itself does not contain any
    node objects. Instead it contains a single reference to only the first node
@@ -307,6 +317,22 @@
   - Modification to the head of the linked list is a special case.
 * 4.25. Key Terms
 * 4.26. Discussion Questions
+** 1
+   [[file:code/baseConverter.py]]
+** 2, 3
+   - (A+B)*(C+D)*(E+F)
+     ((a + b) * (c + d)) * (e + f)
+     (((a + b) * (c + d)) * (e + f))
+     prefix : **+ab+cd+ef
+     postfix : ab+cd+*ef+*
+   - A+((B+C)*(D+E))
+     (a + ((b + c) * (d + e)))
+     prefix : +a*+bc+de
+     postfix : abc+de+*+
+   - A*B*C*D+E+F
+     (((((a*b)*c)*d)+e)+f)
+     prefix : ++***abcdef
+     postfix : ab*c*d*e+f+
 * 4.27. Programming Exercises
 * code
   [[file:code/revstring.py]]
