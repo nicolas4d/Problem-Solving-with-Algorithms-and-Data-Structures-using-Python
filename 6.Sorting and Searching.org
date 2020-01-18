@@ -25,7 +25,7 @@
    [[file:codelends/binarySearch.py]]
    [[file:code/binarySearch.py]]
 
-   Divide and conquer means that we divide the problem into smaller pieces,
+   *Divide and conquer* means that we divide the problem into smaller pieces,
    solve the smaller pieces in some way, and then reassemble the whole problem
    to get the result.
 ** 6.4.1. Analysis of Binary Search
@@ -313,10 +313,10 @@
   used to divide the list for subsequent calls to the quick sort.
 
   [[file:figure/Figure%2013:%20Finding%20the%20Split%20Point%20for%2054.png][Finding the Split Point for 54]]
-
   [[file:figure/Figure%2014:%20Completing%20the%20Partition%20Process%20to%20Find%20the%20Split%20Point%20for%2054.png][Completing the Partition Process to Find the Split Point for 54]]
 
   [[file:activeCode/quickSort.py]]
+  [[file:code/quickSort.py]]
 
   note that for a list of length n, if the partition always occurs in the middle
   of the list, there will again be log𝑛 divisions. In order to find the split
@@ -336,13 +336,17 @@
   - A sequential search is 𝑂(𝑛) for ordered and unordered lists.
   - A binary search of an ordered list is 𝑂(log𝑛) in the worst case.
   - Hash tables can provide constant time searching.
-  - A bubble sort, a selection sort, and an insertion sort are 𝑂(𝑛2) algorithms.
+  - A bubble sort, a selection sort, and an insertion sort are 𝑂(𝑛^2)
+    algorithms.
   - A shell sort improves on the insertion sort by sorting incremental sublists.
-    It falls between 𝑂(𝑛) and 𝑂(𝑛2).
+    It falls between 𝑂(𝑛) and 𝑂(𝑛^2).
   - A merge sort is 𝑂(𝑛log𝑛), but requires additional space for the merging
     process.
-  - A quick sort is 𝑂(𝑛log𝑛), but may degrade to 𝑂(𝑛2) if the split points are
+  - A quick sort is 𝑂(𝑛log𝑛), but may degrade to 𝑂(𝑛^2) if the split points are
     not near the middle of the list. It does not require additional space.
 * 6.14. Key Terms
 * 6.15. Discussion Questions
+** 1
+   at saerch too many times. because hash offers o(1) to search but search too
+   may results o(n).
 * 6.16. Programming Exercises
