@@ -1,16 +1,14 @@
 * 7.1. Objectives
 * 7.2. Examples of Trees
-  A tree data structure has a root, branches, and leaves. The difference between
-  a tree in nature and a tree in computer science is that a tree data structure
-  has its root at the top and its leaves on the bottom.
+  A tree data structure has a root, branches, and leaves.
 
   [[file:figure/Figure%201:%20Taxonomy%20of%20Some%20Common%20Animals%20Shown%20as%20a%20Tree.png][Taxonomy of Some Common Animals Shown as a Tree]]
 
   property:
-  - trees are hierarchical.
-  - all of the children of one node are independent of the children of another
+  - trees are *hierarchical*.
+  - all of the children of one node are *independent* of the children of another
     node.
-  - each leaf node is unique.
+  - each leaf node is *unique*.
   - you can move entire sections of a tree (called a *subtree*) to a different
     position in the tree without affecting the lower levels of the hierarchy.
 * 7.3. Vocabulary and Definitions
@@ -35,7 +33,7 @@
   - Subtree :: A subtree is a set of nodes and edges comprised of a parent and
                all the descendants of that parent.
   - Leaf Node :: A leaf node is a node that has no children.
-  - Level :: The level of a node 𝑛 is the number of edges on the path from the
+  - Level :: The level of a node 𝑛 is the *number of edges* on the path from the
              root node to 𝑛. By definition, the level of the root node is zero.
   - Height :: The height of a tree is equal to the maximum level of any node in
               the tree.
@@ -68,6 +66,7 @@
 
   [[file:activeCode/BinaryTree.py]]
   [[file:code/BinaryTree.py]]
+  [[file:code-pythonds/BinaryTree.py]]
 * 7.6. Parse Tree
   [[file:figure/Figure%202:%20Parse%20Tree%20for%20((7+3)%E2%88%97(5%E2%88%922)).png][Parse Tree for ((7+3)∗(5−2))]]
 
@@ -97,19 +96,23 @@
 
 
   [[file:listing/preorder.py]]
+  [[file:code/preorder.py]]
 
   [[file:listing/postorder.py]]
+  [[file:code/postorder.py]]
 
   [[file:listing/inorder.py]]
-* 7.8. Priority Queues with Binary Heaps
+  [[file:code/inorder.py]]
+* TODO 7.8. Priority Queues with Binary Heaps
   A priority queue acts like a queue in that you dequeue an item by removing it
   from the front. However, in a priority queue the logical order of items
   inside a queue is determined by their priority.
 
   A binary heap will allow us both enqueue and dequeue items in 𝑂(log𝑛).
 
-  min heap, in which the smallest key is always at the front, and the max heap,
-  in which the largest key value is always at the front.
+  min heap, in which the smallest key is always at the front.
+  
+  max heap, in which the largest key value is always at the front.
 * 7.9. Binary Heap Operations
   - BinaryHeap() :: creates a new, empty, binary heap.
   - insert(k) :: adds a new item to the heap.
@@ -127,9 +130,11 @@
 * 7.10. Binary Heap Implementation
 ** 7.10.1. The Structure Property
    *balanced binary* tree has roughly the same number of nodes in the left and
-   right subtrees of the root. A *complete binary* tree is a tree in which each
-   level has all of its nodes. The exception to this is the bottom level of the
-   tree, which we fill in from left to right.
+   right subtrees of the root. 
+
+   A *complete binary* tree is a tree in which each level has all of its nodes.
+   The exception to this is the bottom level of the tree, which we fill in from
+   left to right.
 
    [[file:figure/Figure%201:%20A%20Complete%20Binary%20Tree.png][A Complete Binary Tree]]
 

@@ -3,7 +3,7 @@ from pythonds.trees import BinaryTree
 
 def buildParseTree(fpexp):
     fplist = fpexp.split()
-    pStack = Stack()
+    pStack = Stack()            # following parent node
     eTree = BinaryTree('')
     pStack.push(eTree)
     currentTree = eTree
@@ -23,7 +23,7 @@ def buildParseTree(fpexp):
         elif i == ')':
             currentTree = pStack.pop()
 
-        elif i not in ['+', '-', '*', '/', ')']:
+        elif i not in ['+', '-', '*', '/', ')']:  # operands
             try:
                 currentTree.setRootVal(int(i))
                 parent = pStack.pop()
@@ -36,6 +36,14 @@ def buildParseTree(fpexp):
 
 pt = buildParseTree("( ( 10 + 5 ) * 3 )")
 pt.postorder()
+
+'''
+10
+5
++
+3
+*
+'''
 
 import operator
 
@@ -50,10 +58,13 @@ def evaluate(parseTree):
 
     if leftC and rightC :
         fn = opers[parseTree.getRootVal()]
-        return fn(evaluate(leftC), evaluate(rightC))
+        return fn(evaluate(leftC), evaluate(rightC))  # here is recursion
     else :
         return parseTree.getRootVal()
 
 print()
 print(evaluate(pt))
 
+'''
+45
+'''
