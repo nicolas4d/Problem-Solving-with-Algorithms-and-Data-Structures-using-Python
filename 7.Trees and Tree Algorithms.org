@@ -103,7 +103,7 @@
 
   [[file:listing/inorder.py]]
   [[file:code/inorder.py]]
-* TODO 7.8. Priority Queues with Binary Heaps
+* 7.8. Priority Queues with Binary Heaps
   A priority queue acts like a queue in that you dequeue an item by removing it
   from the front. However, in a priority queue the logical order of items
   inside a queue is determined by their priority.
@@ -223,7 +223,8 @@
     - If the node is the right child of its parent, and itself has no right
       child, then the successor to this node is the successor of its parent,
       excluding this node.
-
+      - if successor is none(root successor is none) and has leftChild then
+        successor is leftChild
     
   yield is similar to return in that it returns a value to the caller. However,
   yield also takes the additional step of freezing the state of the function so
@@ -241,20 +242,20 @@
   If the keys are added in a random order, the height of the tree is going to be
   around log 𝑛 where 𝑛 is the number of nodes in the tree.
 
-  The number of nodes at any particular level is 2𝑑 where 𝑑 is the depth of the
+  The number of nodes at any particular level is 2^𝑑 where 𝑑 is the depth of the
   level. The total number of nodes in a perfectly balanced binary tree is
   2^(ℎ+1)−1, where ℎ represents the height of the tree.
 
-  A perfectly balanced tree has the same number of nodes in the left subtree as
+  *perfectly balanced tree* has the same number of nodes in the left subtree as
   the right subtree.
 
-  balanced binary tree, the worst-case performance of put is 𝑂(log 𝑛), where 𝑛
+  *balanced binary tree*, the worst-case performance of put is 𝑂(log 𝑛), where 𝑛
   is the number of nodes in the tree
 
   put method - worst case O(n).
 
   [[file:figure/Figure%206:%20A%20skewed%20binary%20search%20tree%20would%20give%20poor%20performance.png][A skewed binary search tree would give poor performance]]
-* 7.15. Balanced Binary Search Trees
+* TODO 7.15. Balanced Binary Search Trees
   AVL tree that automatically makes sure that the tree remains balanced at all
   times. AVL tree named for its inventors: G.M. Adelson-Velskii and E.M. Landis.
 

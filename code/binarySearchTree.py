@@ -60,6 +60,8 @@ class TreeNode:
 
         if self.hasRightChild() :
             succ = self.rightChild.findMin()
+        # never do this else, in binarySearchTree, because when call this function
+        # there's has rightChild in binarySearchTree.
         else :
             if self.parent :
                 if self.isLeftChild() :
@@ -68,6 +70,9 @@ class TreeNode:
                     self.parent.rightChild = None
                     succ = self.parent.findSuccessor()
                     self.parent.rightChild = self
+
+                    if succ is None and self.hasLeftChild() :
+                        succ = self.leftChild
 
         return succ
 
@@ -238,3 +243,31 @@ print(mytree[2])
 
 for k in mytree:
     print(k)
+
+'''
+yellow
+at
+2
+3
+4
+6
+'''
+
+
+print()
+
+te = BinarySearchTree()
+te[1] = 1
+te[2] = 2
+te[3] = 3
+te[5] = 5
+te[4] = 4
+
+print(te.root.key)
+print(te.root.rightChild.key)
+print(te.root.rightChild.rightChild.key)
+print(te.root.rightChild.rightChild.rightChild.key)
+print(te.root.rightChild.rightChild.rightChild.leftChild.key)
+
+su = te.root.rightChild.rightChild.rightChild.findSuccessor()
+print(su.key)
