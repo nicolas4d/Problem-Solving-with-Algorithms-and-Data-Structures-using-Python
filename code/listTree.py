@@ -52,3 +52,15 @@ print(getRightChild(getRightChild(r)))
 [3, [9, [11, [4, [], []], []], []], [7, [], [6, [], []]]]
 [6, [], []]
 '''
+
+print()
+# discussion 1
+r = BinaryTree(3)
+insertLeft(r,4)
+insertLeft(r,5)
+insertRight(r,6)
+insertRight(r,7)
+setRootVal(r,9)
+insertLeft(r,11)
+
+print(r)

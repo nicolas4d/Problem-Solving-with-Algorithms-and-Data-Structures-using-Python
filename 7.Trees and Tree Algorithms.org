@@ -238,6 +238,8 @@
 
   [[file:activeCode/binarySearchTree.py]]
   [[file:code/binarySearchTree.py]]
+
+  [[file:code-pythonds/bst.py]]
 * 7.14. Search Tree Analysis
   If the keys are added in a random order, the height of the tree is going to be
   around log 𝑛 where 𝑛 is the number of nodes in the tree.
@@ -255,7 +257,7 @@
   put method - worst case O(n).
 
   [[file:figure/Figure%206:%20A%20skewed%20binary%20search%20tree%20would%20give%20poor%20performance.png][A skewed binary search tree would give poor performance]]
-* TODO 7.15. Balanced Binary Search Trees
+* 7.15. Balanced Binary Search Trees
   AVL tree that automatically makes sure that the tree remains balanced at all
   times. AVL tree named for its inventors: G.M. Adelson-Velskii and E.M. Landis.
 
@@ -384,6 +386,7 @@
   
 
   [[file:figure/Figure%206:%20An%20Unbalanced%20Tree%20that%20is%20More%20Difficult%20to%20Balance.png][An Unbalanced Tree that is More Difficult to Balance]]
+
   [[file:figure/Figure%207:%20After%20a%20Left%20Rotation%20the%20Tree%20is%20Out%20of%20Balance%20in%20the%20Other%20Direction.png][After a Left Rotation the Tree is Out of Balance in the Other Direction]]
   
   To correct this problem we must use the following set of rules:
@@ -399,9 +402,14 @@
     rotation.
 
     get put O(log_2(n))
+
+    
+  [[file:code-pythonds/balance.py]]
 * 7.18. Summary of Map ADT Implementations
   [[file:table/Table%201:%20Comparing%20the%20Performance%20of%20Different%20Map%20Implementations.png][Comparing the Performance of Different Map Implementations]]
 * 7.19. Summary
 * 7.20. Key Terms
 * 7.21. Discussion Questions
+** 1
+   [[file:code/listTree.py]]
 * 7.22. Programming Exercises
