@@ -19,8 +19,8 @@ def posToNodeId(row, column, board_size):
 
 def genLegalMoves(x, y, bdSize):
     newMoves = []
-    moveOffsets = [(-1,-2),(-1,2),(-2,-1),(-2,1),
-                   ( 1,-2),( 1,2),( 2,-1),( 2,1)]
+    moveOffsets = [(-1,-2), (-1,2), (-2,-1), (-2,1),
+                   ( 1,-2), ( 1,2), ( 2,-1), ( 2,1)]
 
     for i in moveOffsets:
         newX = x + i[0]
@@ -43,8 +43,9 @@ def knightTour(n, path, u, limit):
     path.append(u)
 
     if n < limit:
-        nbrList = list(u.getConnections())
-        # nbrList = list(orderByAvail(u))
+
+        # nbrList = list(u.getConnections())
+        nbrList = list(orderByAvail(u))
         i = 0
         done = False
 
@@ -64,19 +65,28 @@ def knightTour(n, path, u, limit):
 
 def orderByAvail(n):
     resList = []
+
     for v in n.getConnections():
         if v.getColor() == 'white':
+            # count next vertex have how many white
             c = 0
+
             for w in v.getConnections():
                 if w.getColor() == 'white':
                     c = c + 1
+
             resList.append((c,v))
-    resList.sort(key=lambda x: x[0])
+
+    resList.sort(key = lambda x: x[0])
     return [y[1] for y in resList]
 
-kg = knightGraph(8)
-alist = []
-knightTour(0, alist, kg.getVertex(1), 63)
 
-for vert in alist:
-    print(vert.getId())
+knightGraph(4)
+
+if __name__ == "__main__" :
+    kg = knightGraph(8)
+    alist = []
+    knightTour(0, alist, kg.getVertex(1), 63)
+
+    for vert in alist:
+        print(vert.getId())

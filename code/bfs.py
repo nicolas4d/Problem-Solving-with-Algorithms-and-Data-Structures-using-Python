@@ -1,5 +1,6 @@
 from pythonds.graphs import Graph, Vertex
 from pythonds.basic import Queue
+from buildGraph import buildGraph
 
 def bfs(g, start):
     start.setDistance(0)
@@ -23,9 +24,12 @@ def traverse(y):
     x = y
 
     while x.getPred():
-        print(x.getId)
+        print(x.getId())
         x = x.getPred()
 
     print(x.getId())
 
-traverse(g.getVertex('sage'))
+g = buildGraph('wordFile.txt')
+bfs(g, g.getVertex('FOOL'))
+
+traverse(g.getVertex('SAGE'))

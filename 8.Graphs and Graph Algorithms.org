@@ -74,6 +74,8 @@
   easily find all the links that are directly connected to a particular vertex.
 * 8.6. Implementation
   [[file:listing/graph.py]]
+  [[file:code/graph.py]]
+  [[file:code-pythonds/adjGraph.py]]
 * 8.7. The Word Ladder Problem
   In a word ladder puzzle you must make the change occur gradually by changing
   one letter at a time. At each step you must transform one word into another
@@ -178,17 +180,19 @@
   the edges of the board first. This ensures that the knight will visit the
   hard-to-reach corners early and can use the middle squares to hop across the
   board only when necessary. Utilizing this kind of knowledge to speed up an
-  algorithm is called a heuristic. Humans use heuristics every day to help make
-  decisions, heuristic searches are often used in the field of artificial
+  algorithm is called a *heuristic*. Humans use heuristics every day to help
+  make decisions, heuristic searches are often used in the field of artificial
   intelligence. This particular heuristic is called Warnsdorff’s algorithm,
   named after H. C. Warnsdorff who published his idea in 1823.
 * 8.15. General Depth First Search
   When the depth first search algorithm creates a group of trees we call this a
-  depth first forest.
+  *depth first forest*.
 
-  The discovery time tracks the number of steps in the algorithm before a vertex
-  is first encountered. The finish time is the number of steps in the algorithm
-  before a vertex is colored black.
+  *discovery time* tracks the number of steps in the algorithm before a vertex
+  is first encountered.
+
+  *finish time* is the number of steps in the algorithm before a vertex is
+  colored black.
 
   [[file:listing/DFSGraph.py]]
   [[file:code/DFSGraph.py]]
@@ -216,6 +220,8 @@
   [[file:figure/Figure%2028:%20Result%20of%20Depth%20First%20Search%20on%20the%20Pancake%20Graph.png][Result of Depth First Search on the Pancake Graph]]
 
   [[file:figure/Figure%2029:%20Result%20of%20Topological%20Sort%20on%20Directed%20Acyclic%20Graph.png][Result of Topological Sort on Directed Acyclic Graph]]
+
+  [[file:code/DFSGraph.py]]  
 * 8.18. Strongly Connected Components
   One graph algorithm that can help find clusters of highly interconnected
   vertices in a graph is called the *strongly connected components algorithm
@@ -250,6 +256,8 @@
   [[file:figure/Figure%2036:%20Finishing%20times%20for%20%20%F0%9D%90%BA%F0%9D%91%87.png][Finishing times for 𝐺𝑇]]
 
   [[file:figure/Figure%2037:%20Strongly%20Connected%20Components.png][Strongly Connected Components]]
+
+  [[file:code/DFSGraph.py]]
 * 8.19. Shortest Path Problems
   [[file:figure/Figure%201:%20Overview%20of%20Connectivity%20in%20the%20Internet.png][Overview of Connectivity in the Internet]]
 
@@ -261,26 +269,23 @@
   other nodes in the graph.
 
   When a vertex is first created dist is set to a very large number.
-  Theoretically you would set dist to infinity, but in practice we just set it
-  to a number that is larger than any real distance we would have in the problem
-  we are trying to solve.
-
+  
   [[file:listing/dijkstra.py]]
+  [[file:code/dijkstra.py]]
 
   It is important to note that Dijkstra’s algorithm works only when the weights
   are all positive. You should convince yourself that if you introduced a
   negative weight on one of the edges to the graph that the algorithm would
   never exit.
 * 8.21. Analysis of Dijkstra’s Algorithm
-  Finally, let us look at the running time of Dijkstra’s algorithm. We first note
-  that building the priority queue takes 𝑂(𝑉) time since we initially add every
-  vertex in the graph to the priority queue. Once the queue is constructed the
-  while loop is executed once for every vertex since vertices are all added at the
-  beginning and only removed after that. Within that loop each call to delMin,
-  takes 𝑂(log𝑉) time. Taken together that part of the loop and the calls to delMin
-  take 𝑂(𝑉log(𝑉)). The for loop is executed once for each edge in the graph, and
-  within the for loop the call to decreaseKey takes time 𝑂(𝐸log(𝑉)). So the
-  combined running time is 𝑂((𝑉+𝐸)log(𝑉)).
+   We first note that building the priority queue takes 𝑂(𝑉) time since we
+  initially add every vertex in the graph to the priority queue. Once the queue
+  is constructed the while loop is executed once for every vertex since vertices
+  are all added at the beginning and only removed after that. Within that loop
+  each call to delMin, takes 𝑂(log𝑉) time. Taken together that part of the loop
+  and the calls to delMin take 𝑂(𝑉log(𝑉)). The for loop is executed once for
+  each edge in the graph, and within the for loop the call to decreaseKey takes
+  time 𝑂(𝐸log(𝑉)). So the combined running time is 𝑂((𝑉+𝐸)log(𝑉)).
 * 8.22. Prim’s Spanning Tree Algorithm
   [[file:figure/Figure%209:%20The%20Broadcast%20Problem.png][The Broadcast Problem]]
 
@@ -300,6 +305,7 @@
   algorithms” because at each step we will choose the cheapest next step.
 
   [[file:listing/prim.py]]
+  [[file:code/prim.py]]
 * 8.23. Summary
   - Breadth first search for finding the unweighted shortest path.
   - Dijkstra’s algorithm for weighted shortest path.

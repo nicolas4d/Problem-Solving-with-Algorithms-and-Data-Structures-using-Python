@@ -26,4 +26,4 @@ def buildGraph(wordFile):
 
     return g
 
-print(buildGraph('wordFile.txt'))
+# print(buildGraph('wordFile.txt'))
