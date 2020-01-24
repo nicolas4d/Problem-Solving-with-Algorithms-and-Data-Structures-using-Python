@@ -32,3 +32,12 @@ for i in range(5):
 
 d_list = [MSDie(6), MSDie(20)]
 print(d_list)
+
+'''
+6
+4
+2
+6
+6
+[MSDie(6) : 5, MSDie(20) : 19]
+'''
