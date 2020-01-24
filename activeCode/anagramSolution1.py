@@ -26,3 +26,4 @@ def anagramSolution1(s1,s2):
     return stillOK
 
 print(anagramSolution1('abcd','dcba'))
+True

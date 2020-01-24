@@ -7,3 +7,4 @@ def sumOfN(n):
     return theSum
 
 print(sumOfN(10))
+10
