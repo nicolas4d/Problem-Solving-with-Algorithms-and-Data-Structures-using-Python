@@ -127,6 +127,20 @@ class NorGate(BinaryGate):
         else :
             return 1
 
+class HalfAdder(BinaryGate):
+    def __init__(self):
+        "init"
+        BinaryGate.__init__(self, "halfAdder")
+
+    def performGateLogic(self):
+        a = self.getPinA()
+        b = self.getPinB()
+
+        if a == b :
+            return 0
+        else :
+            return 1
+
 class Connector:
     def __init__(self, fgate, tgate):
         "init"
@@ -140,9 +154,3 @@ class Connector:
 
     def getTo(self):
         return self.togate
-
-
-
-
-
-

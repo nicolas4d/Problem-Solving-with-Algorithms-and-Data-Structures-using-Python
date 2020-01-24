@@ -18,8 +18,8 @@ class Fraction:
             topInt = - topInt
 
         common = gcd(topInt, bottomInt)
-        self.num = top // common
-        self.den = bottom // common
+        self.num = topInt // common
+        self.den = bottomInt // common
 
     def show(self):
         print(self.num, "/", self.den)

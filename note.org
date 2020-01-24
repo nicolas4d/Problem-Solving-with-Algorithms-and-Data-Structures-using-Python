@@ -1,0 +1,9 @@
+#+TITLE:Problem-Solving-with-Algorithms-and-Data-Structures-using-Python
+* [[file:1.Introduction.org][1.Introduction]]
+* [[file:2.A Proper Class.org][2.A Proper Class]]
+* [[file:3.Analysis.org][3.Analysis]]
+* [[file:4.Basic Data Structures.org][4.Data Structures]]
+* [[file:5.Recursion.org][5.Recursion]]
+* [[file:6.Sorting and Searching.org][6.Sorting and Searching]]
+* [[file:7.Trees and Tree Algorithms.org][7.Trees and Tree Algorithms]]
+* [[file:8.Graphs and Graph Algorithms.org][8.Graphs and Graph Algorithms]]

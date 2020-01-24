@@ -14,3 +14,8 @@ def squareroot(n):
     return root
 
 print(squareroot(9))
+
+
+9
+81
+3.0

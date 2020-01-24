@@ -61,11 +61,22 @@
    Python has two main built-in numeric classes that implement the integer and
    floating point data types. These Python classes are called int and float.
 
+   [[file:example/numeric.py]]
+
    The boolean data type, implemented as the Python bool class, will be quite
    useful for representing truth values. 
 
+   [[file:example/boolean.py]]
+
    Identifiers are used in programming languages as names.
+
+   file:example/identifiers.py
+
+   [[file:figure/Figure%203:%20Variables%20Hold%20References%20to%20Data%20Objects.png][Variables Hold References to Data Objects]]
+   [[file:figure/Figure%204:%20Assignment%20Changes%20the%20Reference.png][Assignment Changes the Reference]]
 ** 1.8.2. Built-in Collection Data Types
+   file:example/collectionDataTypes.py
+
    Lists, strings, and tuples are *ordered collections* that are very similar in
    general structure but have specific differences that must be understood for
    them to be used properly. Sets and dictionaries are *unordered collections*.
@@ -175,9 +186,9 @@
    Python also has a function called super which can be used in place of
    explicitly naming the parent class.
    #+begin_src python
-   LogicGate.__init__(self,n)
+   LogicGate.__init__(self, n)
 
-   super(UnaryGate,self).__init__(n).
+   super(UnaryGate, self).__init__(n).
    #+end_src
 
    [[file:figure/Figure%2012:%20A%20Connector%20Connects%20the%20Output%20of%20One%20Gate%20to%20the%20Input%20of%20Another.png][A Connector Connects the Output of One Gate to the Input of Another]]
@@ -227,6 +238,21 @@
    （如果没有等价的语法，则会发生SyntaxError 异常）， 适合开发和调试阶段使用。
 ** 10
    [[file:code/logicGate.py]]
+** 11
+   The most simple arithmetic circuit is known as the half-adder. Research the
+   simple half-adder circuit. Implement this circuit.
+
+   https://baike.baidu.com/item/半加器/7653973?fr=aladdin
+
+   [[file:code/logicGate.py]]
+** 12 
+   Now extend that circuit and implement an 8 bit full-adder.
+** 13
+   The circuit simulation shown in this chapter works in a backward direction. In other words, given a circuit, the output is produced by working back through the input values, which in turn cause other outputs to be queried. This continues until external input lines are found, at which point the user is asked for values. Modify the implementation so that the action is in the forward direction; upon receiving inputs the circuit produces an output.
+** 14
+   Design a class to represent a playing card. Now design a class to represent a deck of cards. Using these two classes, implement a favorite card game.
+** 15
+   Find a Sudoku puzzle in the local newspaper. Write a program to solve the puzzle.   
 * code
   [[file:code/fraction.py]]
   [[file:code/logicGate.py]]

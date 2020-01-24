@@ -91,6 +91,14 @@ class TestNorGate(unittest.TestCase):
         ng = NorGate("Nor Gate")
         # print(ng.performGateLogic())
 
+class TesthalfAdder(unittest.TestCase):
+    def test_init(self):
+        hf = HalfAdder()
+
+    def test_performGateLogic(self):
+        hf = HalfAdder()
+        # print(hf.performGateLogic())
+
 class TestConnector(unittest.TestCase):
     def test_init(self):
         andGate = AndGate("And Gate")
@@ -117,19 +125,22 @@ class TestComprehensive(unittest.TestCase):
         # norGate = NorGate("NorGate")
         # print(norGate.performGateLogic())
 
-        g1 = AndGate("g1")
-        g2 = AndGate("g2")
-        g3 = NorGate("g3")
-        Connector(g1, g3)
-        Connector(g2, g3)
-        print(g3.getOutput())
 
-        g4 = NandGate("g4")
-        g5 = NandGate("g5")
-        g8 = AndGate("g8")
-        Connector(g4, g8)
-        Connector(g5, g8)
-        print(g8.getOutput())
+        # g1 = AndGate("g1")
+        # g2 = AndGate("g2")
+        # g3 = NorGate("g3")
+        # Connector(g1, g3)
+        # Connector(g2, g3)
+        # print(g3.getOutput())
+
+        # g4 = NandGate("g4")
+        # g5 = NandGate("g5")
+        # g8 = AndGate("g8")
+        # Connector(g4, g8)
+        # Connector(g5, g8)
+        # print(g8.getOutput())
+
+        pass
 
 if __name__ == '__main__':
     unittest.main()
