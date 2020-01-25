@@ -8,8 +8,8 @@
 * 4.3. What is a Stack?
   A *stack* (sometimes called a “push-down stack”) is an ordered collection of
   items where the addition of new items and the removal of existing items always
-  takes place at the same end. This end is commonly referred to as the “top.”
-  The end opposite the top is known as the “base.”
+  takes place at the same end. This end is commonly referred to as the *top* The
+  end opposite the top is known as the *base*.
 
   The most recently added item is the one that is in position to be removed
   first. This ordering principle is sometimes called *LIFO, last-in first-out*
@@ -38,9 +38,9 @@
   [[file:code/stack.py]]
 
   The pythonds module contains implementations of all data structures discussed
-  in this book. It is structured according to the sections: basic, trees, and
-  graphs. The module can be downloaded from GitHub. or installed from the
-  command line using pip install pythonds.
+  in this book. 
+
+  pip install pythonds.
 
   [[file:code-pythonds/stack.py]]
 * 4.6. Simple Balanced Parentheses
@@ -333,6 +333,28 @@
      (((((a*b)*c)*d)+e)+f)
      prefix : ++***abcdef
      postfix : ab*c*d*e+f+
+** 4 
+   (A+B)*(C+D)*(E+F)
+   A+((B+C)*(D+E))
+   A*B*C*D+E+F
+
+   Convert the above infix expressions to postfix using the direct conversion
+   algorithm. Show the stack as the conversion takes place.
+
+   [[file:code/infixToPostfix.py]]
+** 5   
+   Evaluate the following postfix expressions. Show the stack as each operand and operator is processed.
+   2 3 * 4 +
+   1 2 + 3 + 4 + 5 +
+   1 2 3 4 5 * + * +
+** 
+   The alternative implementation of the Queue ADT is to use a list such that the rear of the queue is at the end of the list. What would this mean for Big-O performance?
+** 
+   What is the result of carrying out both steps of the linked list add method in reverse order? What kind of reference results? What types of problems may result?
+** 
+   Explain how the linked list remove method works when the item to be removed is in the last node.
+** 
+   Explain how the remove method works when the item is in the only node in the linked list.
 * 4.27. Programming Exercises
 * code
   [[file:code/revstring.py]]

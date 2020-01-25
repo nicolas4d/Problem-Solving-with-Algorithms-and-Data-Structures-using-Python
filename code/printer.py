@@ -24,7 +24,7 @@ class Printer:
 
     def startNext(self, newtask):
         self.currentTask = newtask
-        self.timeRemaining = newtask.getPages() * 60 / self.pagerate
+        self.timeRemaining = newtask.getPages()  * 60  / self.pagerate
 
 class Task:
     def __init__(self, time):
