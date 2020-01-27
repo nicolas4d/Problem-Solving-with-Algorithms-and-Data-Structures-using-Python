@@ -73,9 +73,11 @@ class Maze:
 
     def moveTurtle(self, x, y):
         self.t.up()
-        self.t.setheading(self.t.towards(x + self.xTranslate,
-                                          -y + self.yTranslate))
-        self.t.goto(x + self.xTranslate, -y + self.yTranslate)
+        self.t.setheading(
+            self.t.towards(
+                x + self.xTranslate,
+                - y + self.yTranslate))
+        self.t.goto(x + self.xTranslate, - y + self.yTranslate)
 
     def dropBreadcrumb(self, color):
         self.t.dot(10, color)

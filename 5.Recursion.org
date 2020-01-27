@@ -10,7 +10,7 @@
   A recursive function is a function that calls itself.
 * 5.4. The Three Laws of Recursion
   1. A recursive algorithm must have a *base case*.
-  2. A recursive algorithm must change its state and move toward the base case.
+  2. A recursive algorithm must change its state and *move toward the base case.
   3. A recursive algorithm must call itself, recursively.
 * 5.5. Converting an Integer to a String in Any Base
   1. Reduce the original number to a series of single-digit numbers.
@@ -49,6 +49,7 @@
 
      
   [[file:activeCode/hanoi.py]]
+  [[file:code/hanoi.py]]
 * 5.11. Exploring a Maze
   [[file:figure/Figure%202:%20The%20Finished%20Maze%20Search%20Program.png][The Finished Maze Search Program]]
 
