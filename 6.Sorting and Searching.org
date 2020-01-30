@@ -221,9 +221,10 @@
   [[file:activeCode/bubbleSort.py]]
   [[file:code/bubbleSort.py]]
 
-  the sum of the first n integers is 1/2 * 𝑛^2 + 1/2 * 𝑛. The sum of the first
-  𝑛−1 integers is 1/2 * 𝑛^2 + 1/2 * 𝑛 - n, which is 1/2 * 𝑛^2 - 1/2 * 𝑛. This is
-  still 𝑂(𝑛^2) comparisons.
+  the sum of the first n integers is 1/2 * 𝑛^2 + 1/2 * 𝑛.
+
+  The sum of the first 𝑛−1 integers is 1/2 * 𝑛^2 + 1/2 * 𝑛 - n, which is 1/2 *
+  𝑛^2 - 1/2 * 𝑛. This is still 𝑂(𝑛^2) comparisons.
 
   [[file:table/Table%201:%20Comparisons%20for%20Each%20Pass%20of%20Bubble%20Sort.png][Comparisons for Each Pass of Bubble Sort]]
 
@@ -273,7 +274,7 @@
   [[file:code/shellSort.py]]
 
   it tends to fall somewhere between 𝑂(𝑛) and 𝑂(𝑛^2). By changing the increment,
-  for example using 2^(𝑘−1) (1, 3, 7, 15, 31, and so on), a shell sort can
+  for example using 2^𝑘 − 1 (1, 3, 7, 15, 31, and so on), a shell sort can
   perform at 𝑂(𝑛^(3/2)).
 * 6.11. The Merge Sort
   Merge sort is a recursive algorithm that continually splits a list in half. If
@@ -294,11 +295,11 @@
   *stable algorithm* maintains the order of duplicate items in a list and is
   preferred in most cases.
   
-  we can divide a list in half log𝑛 times where n is the length of the list. The
-  second process is the merge. Each item in the list will eventually be
+  we can divide a list in half log 𝑛 times where n is the length of the list.
+  The second process is the merge. Each item in the list will eventually be
   processed and placed on the sorted list. So the merge operation which results
   in a list of size n requires n operations. The result of this analysis is that
-  log𝑛 splits, each of which costs 𝑛 for a total of 𝑛log𝑛 operations. A merge
+  log 𝑛 splits, each of which costs 𝑛 for a total of 𝑛log𝑛 operations. A merge
   sort is an 𝑂(𝑛log𝑛) algorithm.
 
   the slicing operator is 𝑂(𝑘) where k is the size of the slice. In order to
@@ -319,9 +320,9 @@
   [[file:code/quickSort.py]]
 
   note that for a list of length n, if the partition always occurs in the middle
-  of the list, there will again be log𝑛 divisions. In order to find the split
+  of the list, there will again be log 𝑛 divisions. In order to find the split
   point, each of the n items needs to be checked against the pivot value. The
-  result is 𝑛log𝑛.
+  result is 𝑛 log 𝑛.
 
   in the worst case, the split points may not be in the middle and can be very
   skewed to the left or the right, leaving a very uneven division. In this case,
@@ -349,4 +350,8 @@
 ** 1
    at saerch too many times. because hash offers o(1) to search but search too
    may results o(n).
+** 2
+   Modify the hash function for strings to use positional weightings.
+
+   [[file:code/discussion2.py]]
 * 6.16. Programming Exercises

@@ -17,3 +17,7 @@ def orderedSequentialSearch(alist, item):
 testlist = [0, 1, 2, 8, 13, 17, 19, 32, 42]
 print(orderedSequentialSearch(testlist, 3))
 print(orderedSequentialSearch(testlist, 13))
+'''
+False
+True
+'''

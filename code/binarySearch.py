@@ -19,6 +19,10 @@ def binarySearch(alist, item):
 testlist = [0, 1, 2, 8, 13, 17, 19, 32, 42,]
 print(binarySearch(testlist, 3))
 print(binarySearch(testlist, 13))
+False
+True
+
+print()
 
 def binarySearch(alist, item):
     if len(alist) == 0 :
@@ -37,6 +41,5 @@ def binarySearch(alist, item):
 testlist = [0, 1, 2, 8, 13, 17, 19, 32, 42,]
 print(binarySearch(testlist, 3))
 print(binarySearch(testlist, 13))
-
-
-
+False
+True
