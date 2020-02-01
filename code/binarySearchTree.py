@@ -71,9 +71,6 @@ class TreeNode:
                     succ = self.parent.findSuccessor()
                     self.parent.rightChild = self
 
-                    if succ is None and self.hasLeftChild() :
-                        succ = self.leftChild
-
         return succ
 
     def findMin(self):
@@ -271,3 +268,4 @@ print(te.root.rightChild.rightChild.rightChild.leftChild.key)
 
 su = te.root.rightChild.rightChild.rightChild.findSuccessor()
 print(su.key)
+

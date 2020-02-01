@@ -45,6 +45,21 @@ pt.postorder()
 *
 '''
 
+print()
+
+pt = buildParseTree("( ( 4 + 8 ) / ( 6 - 3 ) )")
+pt.postorder()
+"""
+4
+8
++
+6
+3
+-
+/
+"""
+
+
 import operator
 
 def evaluate(parseTree):

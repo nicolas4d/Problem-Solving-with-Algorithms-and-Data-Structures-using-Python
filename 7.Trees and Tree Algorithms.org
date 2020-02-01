@@ -129,10 +129,10 @@
   [[file:code/heap.py]]
 * 7.10. Binary Heap Implementation
 ** 7.10.1. The Structure Property
-   *balanced binary* tree has roughly the same number of nodes in the left and
+   *balanced binary tree* has roughly the same number of nodes in the left and
    right subtrees of the root. 
 
-   A *complete binary* tree is a tree in which each level has all of its nodes.
+   A *complete binary tree* is a tree in which each level has all of its nodes.
    The exception to this is the bottom level of the tree, which we fill in from
    left to right.
 
@@ -223,8 +223,6 @@
     - If the node is the right child of its parent, and itself has no right
       child, then the successor to this node is the successor of its parent,
       excluding this node.
-      - if successor is none(root successor is none) and has leftChild then
-        successor is leftChild
     
   yield is similar to return in that it returns a value to the caller. However,
   yield also takes the additional step of freezing the state of the function so
@@ -246,7 +244,7 @@
 
   The number of nodes at any particular level is 2^𝑑 where 𝑑 is the depth of the
   level. The total number of nodes in a perfectly balanced binary tree is
-  2^(ℎ+1)−1, where ℎ represents the height of the tree.
+  2^ℎ −1, where ℎ represents the height of the tree.
 
   *perfectly balanced tree* has the same number of nodes in the left subtree as
   the right subtree.
@@ -412,4 +410,9 @@
 * 7.21. Discussion Questions
 ** 1
    [[file:code/listTree.py]]
+** 2
+   Trace the algorithm for creating an expression tree for the expression
+   (4∗8)/6−3.
+
+   [[file:code/parseTree.py]]
 * 7.22. Programming Exercises

@@ -10,3 +10,9 @@ print(bh.delMin())
 print(bh.delMin())
 print(bh.delMin())
 print(bh.delMin())
+'''
+3
+5
+7
+11
+'''
